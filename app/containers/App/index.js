@@ -1,28 +1,46 @@
-/**
- *
- * App.js
- *
- * This component is the skeleton around the actual pages, and should only
- * contain code that should be seen on all pages. (e.g. navigation bar)
- *
- */
-
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectors } from 'stores';
 
-import HomePage from 'containers/HomePage/Loadable';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import DashboardLayout from 'layouts/Dashboard';
+import HomePage from 'containers/HomePage';
+import Dashboard from 'containers/DashboardPage';
+import AnnouncementList from 'containers/AnnouncementListPage';
+import AnnouncementCreate from 'containers/AnnouncementCreatePage';
 
-import GlobalStyle from '../../global-styles';
+const App = props => {
+  const { isAuthenticated } = props;
 
-export default function App() {
   return (
-    <div>
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route component={NotFoundPage} />
-      </Switch>
-      <GlobalStyle />
-    </div>
+    <Switch>
+      <DashboardLayout path="/home" component={HomePage} />
+      <DashboardLayout path="/dashboard" component={Dashboard} />
+      <DashboardLayout
+        path="/announcement/browse"
+        component={AnnouncementList}
+      />
+      <DashboardLayout
+        path="/announcement/create"
+        component={AnnouncementCreate}
+      />
+      {isAuthenticated ? (
+        <Redirect from="/" to="/dashboard" />
+      ) : (
+        <Redirect from="/" to="/login" />
+      )}
+    </Switch>
   );
-}
+};
+
+App.propTypes = {
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = createStructuredSelector({
+  isAuthenticated: selectors.auth.makeSelectAuthenticated(),
+});
+
+export default connect(mapStateToProps)(App);

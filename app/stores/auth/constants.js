@@ -1,0 +1,10 @@
+export const AUTHENTICATE = 'stores/auth/AUTHENTICATE';
+export const LOGIN = 'stores/auth/LOGIN';
+export const LOGIN_FAILURE = 'stores/auth/LOGIN_FAILURE';
+export const LOGIN_LOADING = 'stores/auth/LOGIN_LOADING';
+export const LOGIN_SUCCESS = 'stores/auth/LOGIN_SUCCESS';
+export const LOGOUT = 'stores/auth/LOGOUT';
+export const REGISTER = 'stores/auth/REGISTER';
+export const REGISTER_FAILURE = 'stores/auth/REGISTER_FAILURE';
+export const REGISTER_LOADING = 'stores/auth/REGISTER_LOADING';
+export const REGISTER_SUCCESS = 'stores/auth/REGISTER_SUCCESS';
