@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Paper, IconButton, Typography, colors } from '@material-ui/core';
-import CheckCircleIcon from '@material-ui/icons/CheckCircleOutlined';
-import CloseIcon from '@material-ui/icons/CloseOutlined';
-import ErrorIcon from '@material-ui/icons/ErrorOutlined';
-import InfoIcon from '@material-ui/icons/InfoOutlined';
-import WarningIcon from '@material-ui/icons/WarningOutlined';
+import {
+  CloseOutlined,
+  CheckCircleOutlined,
+  ErrorOutlined,
+  InfoOutlined,
+  WarningOutlined,
+} from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -56,11 +58,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const icons = {
-  default: <InfoIcon />,
-  success: <CheckCircleIcon />,
-  info: <InfoIcon />,
-  warning: <WarningIcon />,
-  error: <ErrorIcon />,
+  default: <InfoOutlined />,
+  success: <CheckCircleOutlined />,
+  info: <InfoOutlined />,
+  warning: <WarningOutlined />,
+  error: <ErrorOutlined />,
 };
 
 const Alert = forwardRef((props, ref) => {
@@ -86,7 +88,7 @@ const Alert = forwardRef((props, ref) => {
           key="close"
           onClick={onClose}
         >
-          <CloseIcon />
+          <CloseOutlined />
         </IconButton>
       )}
     </Paper>

@@ -1,13 +1,15 @@
 import authReducer from './auth/reducer';
-import editorReducer from './editor/reducer';
+import announcementReducer from './announcement/reducer';
 import formReducer from './form/reducers';
-import preferencesReducer from './preferences/reducer';
+import alertReducer from './components/alerts/reducer';
 import layoutDashboardReducer from './components/layout-dashboard/reducer';
+import preferencesReducer from './preferences/reducer';
 
 export {
   authReducer,
-  editorReducer,
+  announcementReducer,
   formReducer,
-  preferencesReducer,
+  alertReducer,
   layoutDashboardReducer,
+  preferencesReducer,
 };

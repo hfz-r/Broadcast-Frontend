@@ -80,7 +80,7 @@ const Search = () => {
           className={classes.searchInput}
           onChange={handleSearchChange}
           value={searchValue}
-          placeholder="Search people &amp; places"
+          placeholder="Search people &amp; projects"
           disableUnderline
         />
       </div>

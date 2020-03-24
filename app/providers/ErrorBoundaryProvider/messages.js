@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.provider.ErrorBoundaryProvider';
+export const scope = 'provider.ErrorBoundaryProvider';
 
 export default defineMessages({
   header: {
@@ -8,7 +8,7 @@ export default defineMessages({
     defaultMessage: '500: Ooops, something went terribly wrong!',
   },
   continueButton: {
-    id: `${scope}.error.continue.button`,
+    id: `${scope}.error.button.continue`,
     defaultMessage: 'Continue',
   },
 });

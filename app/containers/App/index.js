@@ -8,8 +8,9 @@ import { selectors } from 'stores';
 import DashboardLayout from 'layouts/Dashboard';
 import HomePage from 'containers/HomePage';
 import Dashboard from 'containers/DashboardPage';
-import AnnouncementList from 'containers/AnnouncementListPage';
-import AnnouncementCreate from 'containers/AnnouncementCreatePage';
+import AnnouncementList from 'containers/ListPage';
+import AnnouncementCreate from 'containers/CreatePage';
+import AnnouncementDetails from 'containers/DetailsPage';
 
 const App = props => {
   const { isAuthenticated } = props;
@@ -19,12 +20,22 @@ const App = props => {
       <DashboardLayout path="/home" component={HomePage} />
       <DashboardLayout path="/dashboard" component={Dashboard} />
       <DashboardLayout
-        path="/announcement/browse"
+        path="/announcements/browse"
         component={AnnouncementList}
       />
       <DashboardLayout
-        path="/announcement/create"
+        path="/announcements/create"
         component={AnnouncementCreate}
+      />
+      <DashboardLayout
+        path="/announcements/:id"
+        component={AnnouncementDetails}
+        exact
+      />
+      <DashboardLayout
+        path="/announcements/:id/:tab"
+        component={AnnouncementDetails}
+        exact
       />
       {isAuthenticated ? (
         <Redirect from="/" to="/dashboard" />

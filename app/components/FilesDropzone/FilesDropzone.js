@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import clsx from 'clsx';
 import uuid from 'uuid/v1';
 import { useDropzone } from 'react-dropzone';
@@ -19,10 +18,11 @@ import {
   Tooltip,
   colors,
 } from '@material-ui/core';
+import { connect } from 'react-redux';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Image from 'components/Images';
-import bytesToSize from 'templates/utils/bytesToSize';
+import bytesToSize from 'utils/bytesToSize';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -63,21 +63,46 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const getBase64 = file =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+    reader.readAsDataURL(file);
+  });
+
 const FilesDropzone = props => {
   const { className, input, dispatch, ...rest } = props;
   const classes = useStyles();
 
   const handleDrop = useCallback(
-    acceptedFiles => {
+    async acceptedFiles => {
       const files = input.value || [];
-      const allFiles = files.concat(acceptedFiles);
-      input.onChange(allFiles);
+      try {
+        const fileObj = {
+          name: acceptedFiles[0].name,
+          type: acceptedFiles[0].type,
+          size: acceptedFiles[0].size,
+          data: await getBase64(acceptedFiles[0]).then(
+            result => result.split('base64,')[1],
+          ),
+        };
+        const allFiles = files.concat(fileObj);
+        input.onChange(allFiles);
+      } catch (e) {
+        console.log(e.message);
+      }
     },
     [input.value],
   );
 
   const handleRemoveAll = () => {
     input.onChange([]);
+  };
+
+  const handleUpload = () => {
+    // use api to submit form
+    input.value.map(file => console.log(file));
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -138,7 +163,12 @@ const FilesDropzone = props => {
             <Button onClick={handleRemoveAll} size="small">
               Remove all
             </Button>
-            <Button color="secondary" size="small" variant="contained">
+            <Button
+              onClick={handleUpload}
+              color="secondary"
+              size="small"
+              variant="contained"
+            >
               Upload files
             </Button>
           </div>

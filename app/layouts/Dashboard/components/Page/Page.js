@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@material-ui/styles';
 
-const Wrapper = styled('div')({
+const Wrapper = styled('div')(({ theme }) => ({
   position: 'relative',
   flexDirection: 'row',
   justifyContent: 'flex-start',
@@ -10,10 +10,14 @@ const Wrapper = styled('div')({
   // height: 'calc(100% - 20px)',
   overflowY: 'auto',
   width: '100%',
+  [theme.breakpoints.up('lg')]: {
+    width: 'calc(100% - 256px)',
+    marginLeft: 256,
+  },
   '& div': {
     boxSizing: 'border-box',
   },
-});
+}));
 
 class PageContainer extends React.Component {
   componentDidUpdate(prevProps) {

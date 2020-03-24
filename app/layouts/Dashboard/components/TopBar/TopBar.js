@@ -4,7 +4,8 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { AppBar, Toolbar, Hidden } from '@material-ui/core';
 import { Notification } from 'components';
-import { Brand, MenuButton, Search, LogoutButton } from './components';
+import LocaleSelector from 'containers/LocaleSelector';
+import { MenuButton, Search, LogoutButton } from './components';
 
 const useStyles = makeStyles({
   root: {
@@ -29,11 +30,12 @@ const TopBar = props => {
         <Hidden lgUp>
           <MenuButton />
         </Hidden>
-        <Brand />
+        {/* <Brand /> */}
         <div className={classes.flexGrow} />
         <Hidden smDown>
           <Search />
         </Hidden>
+        <LocaleSelector />
         <Hidden mdDown>
           <Notification />
           <LogoutButton />

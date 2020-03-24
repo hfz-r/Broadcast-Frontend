@@ -1,0 +1,11 @@
+{
+  "provider.ErrorBoundaryProvider.error.header": "500: Ooops, ada yang sangat salah!",
+  "provider.ErrorBoundaryProvider.error.continue.button": "Sambung",
+  "container.AnnouncementCreate.button.clear": "Padam",
+  "container.AnnouncementCreate.button.createannouncement": "Cipta pengumuman",
+  "container.AnnouncementCreate.formhelper.required": "Dikehendaki",
+  "container.AnnouncementList.onload.failure": "Ada yang salah. Sila muat semula!",
+  "components.snackbar.create_announcement_error": "Gagal mencipta pengumuman",
+  "components.snackbar.create_announcement_success": "Pengumuman berjaya dicipta!",
+  "components.snackbar.unknown_error": "Ralat telah berlaku"
+}

@@ -21,7 +21,7 @@ import {
 import ShareIcon from '@material-ui/icons/Share';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import getInitials from 'templates/utils/getInitials';
+import getInitials from 'utils/getInitials';
 import Label from 'components/Label';
 
 const useStyles = makeStyles(theme => ({
@@ -64,6 +64,9 @@ const AnnouncementCard = props => {
   const classes = useStyles();
   const [liked, setLiked] = useState(announcement.liked);
 
+  const trimString = (string, length) =>
+    string.length > length ? `${string.substring(0, length)}...` : string;
+
   const handleLike = () => {
     setLiked(true);
   };
@@ -76,8 +79,12 @@ const AnnouncementCard = props => {
     <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
         avatar={
-          <Avatar alt="Author" src={announcement.author.avatar}>
-            {getInitials(announcement.author.name)}
+          <Avatar alt="Author" src={announcement.author.image}>
+            {getInitials(
+              `${announcement.author.first_name} ${
+                announcement.author.last_name
+              }`,
+            )}
           </Avatar>
         }
         className={classes.header}
@@ -91,7 +98,9 @@ const AnnouncementCard = props => {
               to="/profile/1/timeline"
               variant="h6"
             >
-              {announcement.author.name}
+              {`${announcement.author.first_name} ${
+                announcement.author.last_name
+              }`}
             </Link>{' '}
             | Updated: {moment(announcement.updated_at).fromNow()}
           </Typography>
@@ -100,26 +109,25 @@ const AnnouncementCard = props => {
           <Link
             color="textPrimary"
             component={RouterLink}
-            to="/announcement/1/overview"
+            to={`/announcements/${announcement.message_id}/overview`}
             variant="h5"
           >
-            {announcement.title}
+            {announcement.projectAbout.title}
           </Link>
         }
       />
       <CardContent className={classes.content}>
         <div className={classes.description}>
           <Typography colo="textSecondary" variant="subtitle2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-            convallis, eros id porta tempus, elit lectus dignissim dolor, non
-            semper mauris magna eu quam. Integer at leo dictum tortor dapibus.
+            {trimString(announcement.projectAbout.description, 30)}
           </Typography>
         </div>
         <div className={classes.tags}>
-          {announcement.tags.map(tag => (
-            <Label color={tag.color} key={tag.text}>
-              {tag.text}
-            </Label>
+          {announcement.projectAbout.tags.map(tag => (
+            // <Label color={tag.color} key={tag.text}>
+            //   {tag.text}
+            // </Label>
+            <Label key={tag}>{tag}</Label>
           ))}
         </div>
         <Divider />
@@ -131,11 +139,13 @@ const AnnouncementCard = props => {
             spacing={3}
           >
             <Grid item>
-              <Typography variant="h5">{announcement.project}</Typography>
+              <Typography variant="h5">
+                {announcement.project.toUpperCase()}
+              </Typography>
               <Typography variant="body2">Project</Typography>
             </Grid>
             <Grid item>
-              <Typography variant="h5">{announcement.location}</Typography>
+              <Typography variant="h5">NGC</Typography>
               <Typography variant="body2">Location</Typography>
             </Grid>
             <Grid item>
@@ -169,7 +179,7 @@ const AnnouncementCard = props => {
                 className={classes.learnMoreButton}
                 component={RouterLink}
                 size="small"
-                to="/announcement/1/overview"
+                to={`/announcements/${announcement.message_id}/overview`}
               >
                 Learn more
               </Button>

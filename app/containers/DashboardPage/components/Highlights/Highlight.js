@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Card, Typography, Avatar, colors } from '@material-ui/core';
 import HighlightIcon from '@material-ui/icons/Highlight';
 import { Label } from 'components';
-import gradients from 'templates/utils/gradients';
+import gradients from 'utils/gradients';
 
 const useStyles = makeStyles(theme => ({
   root: {

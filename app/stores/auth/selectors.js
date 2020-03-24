@@ -15,4 +15,15 @@ const makeSelectLogin = () =>
     authState => authState.login,
   );
 
-export { selectAuth, makeSelectAuthenticated, makeSelectLogin };
+const makeSelectSession = () =>
+  createSelector(
+    selectAuth,
+    authState => authState.userSession,
+  );
+
+export {
+  selectAuth,
+  makeSelectAuthenticated,
+  makeSelectLogin,
+  makeSelectSession,
+};

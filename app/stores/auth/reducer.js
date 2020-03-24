@@ -13,10 +13,11 @@ export const initialState = {
   isLoggingIn: false,
   login: [],
   userSession: {
+    username: 'hfz-r',
     first_name: 'Hafiz',
     last_name: 'R',
     email: 'admin@brdcst.io',
-    avatar: 'https://i.pravatar.cc/100',
+    image: 'https://api.adorable.io/avatars/200/hafiz@adorable.io.png',
     bio: 'Admin',
     role: 'ADMIN', // ['GUEST', 'USER', 'ADMIN']
   },

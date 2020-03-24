@@ -13,7 +13,7 @@ const preferencesReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case CHANGE_LOCALE:
-        draft.locale = action.payload;
+        draft.locale = action.locale;
         break;
       case SET_THEME:
         draft.theme = action.payload;

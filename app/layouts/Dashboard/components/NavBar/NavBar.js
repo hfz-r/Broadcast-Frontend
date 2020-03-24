@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { connect } from 'react-redux';
 import { actions } from 'stores';
 import { makeStyles } from '@material-ui/styles';
-import { Drawer, Hidden, Paper } from '@material-ui/core';
+import { Drawer, Hidden } from '@material-ui/core';
 import { NavbarContent } from './components';
 
 const useStyles = makeStyles(theme => ({
@@ -56,18 +56,15 @@ const NavBar = props => {
         </Drawer>
       </Hidden>
       <Hidden mdDown>
-        <Paper
-          {...rest}
-          className={clsx(classes.root, className)}
-          elevation={1}
-          square
-        >
-          <NavbarContent
-            {...rest}
-            location={location}
-            userSession={userSession}
-          />
-        </Paper>
+        <Drawer open variant="permanent">
+          <div className={clsx(classes.root, className)}>
+            <NavbarContent
+              {...rest}
+              location={location}
+              userSession={userSession}
+            />
+          </div>
+        </Drawer>
       </Hidden>
     </React.Fragment>
   );

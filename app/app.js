@@ -13,6 +13,7 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 /* eslint-disable import/no-unresolved, import/extensions */
 import '!file-loader?name=[name].[ext]!./assets/images/favicon.ico';
 import 'file-loader?name=.htaccess!./.htaccess';
+import './templates/mixins';
 import './assets/scss/index.scss';
 /* eslint-enable import/no-unresolved, import/extensions */
 
@@ -54,7 +55,12 @@ if (!window.Intl) {
   new Promise(resolve => {
     resolve(import('intl'));
   })
-    .then(() => Promise.all([import('intl/locale-data/jsonp/en.js')]))
+    .then(() =>
+      Promise.all([
+        import('intl/locale-data/jsonp/en.js'),
+        import('intl/locale-data/jsonp/my.js'),
+      ]),
+    )
     .then(() => render(translationMessages))
     .catch(err => {
       throw err;

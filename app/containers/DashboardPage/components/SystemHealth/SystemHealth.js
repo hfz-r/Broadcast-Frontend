@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Card, Typography, Avatar, LinearProgress } from '@material-ui/core';
 import DoneIcon from '@material-ui/icons/Done';
-import gradients from 'templates/utils/gradients';
+import gradients from 'utils/gradients';
 
 const useStyles = makeStyles(theme => ({
   root: {

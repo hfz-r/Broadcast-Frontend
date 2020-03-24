@@ -15,7 +15,7 @@ import {
   ListItemText,
 } from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import gradients from 'templates/utils/gradients';
+import gradients from 'utils/gradients';
 import { Chart } from './components';
 
 const useStyles = makeStyles(theme => ({

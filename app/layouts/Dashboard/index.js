@@ -18,7 +18,7 @@ class DashboardLayoutContainer extends React.Component {
     isAuthenticated: PropTypes.bool,
     auth: PropTypes.object,
     computedMatch: PropTypes.object,
-    component: PropTypes.func,
+    component: PropTypes.elementType,
   };
 
   componentDidMount() {

@@ -18,20 +18,20 @@ export default [
       },
       {
         title: 'Announcement',
-        href: '/announcement',
+        href: '/announcements',
         icon: AddAlertOutlinedIcon,
         children: [
           {
             title: 'Browse',
-            href: '/announcement/browse',
+            href: '/announcements/browse',
           },
           {
             title: 'Create',
-            href: '/announcement/create',
+            href: '/announcements/create',
           },
           {
             title: 'Overview',
-            href: '/announcement/overview',
+            href: '/announcements/1/overview',
           },
         ],
       },

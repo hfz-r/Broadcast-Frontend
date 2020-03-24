@@ -1,13 +1,17 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {
+  convertFromHTML,
+  ContentState,
   Editor,
   EditorState,
   RichUtils,
   Modifier,
   getDefaultKeyBinding,
 } from 'draft-js';
+import { stateToHTML } from 'draft-js-export-html';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
 import { Paper, Divider } from '@material-ui/core';
 
@@ -86,13 +90,33 @@ const RichEditor = props => {
   const {
     placeholder,
     className,
-    editorState,
-    setEditorState,
-    ...rest
+    input,
+    meta: { pristine },
   } = props;
 
-  const classes = useStyles();
   const editorRef = useRef(null);
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const classes = useStyles();
+
+  useEffect(() => {
+    if (input.value) {
+      const blocksFromHTML = convertFromHTML(input.value);
+      const content = ContentState.createFromBlockArray(blocksFromHTML);
+
+      const state = EditorState.createWithContent(content);
+      setEditorState(state);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (pristine) {
+      const clearState = EditorState.push(
+        editorState,
+        ContentState.createFromText(''),
+      );
+      setEditorState(clearState);
+    }
+  }, [pristine]);
 
   const handleContainerClick = () => {
     editorRef.current.focus();
@@ -124,6 +148,7 @@ const RichEditor = props => {
   };
 
   const handleEditorChange = state => {
+    input.onChange(stateToHTML(editorState.getCurrentContent()));
     setEditorState(state);
   };
 
@@ -163,7 +188,7 @@ const RichEditor = props => {
   }
 
   return (
-    <Paper {...rest} className={clsx(classes.root, className)}>
+    <Paper className={clsx(classes.root, className)}>
       <EditorToolbar editorState={editorState} onToggle={handleToolbarToggle} />
       <Divider />
       <div
@@ -172,6 +197,7 @@ const RichEditor = props => {
         onClick={handleContainerClick}
       >
         <Editor
+          {...input}
           blockRenderMap={blockRenderMap}
           blockStyleFn={blockStyleFn}
           editorState={editorState}
@@ -190,8 +216,8 @@ const RichEditor = props => {
 RichEditor.propTypes = {
   className: PropTypes.string,
   placeholder: PropTypes.any,
-  editorState: PropTypes.object,
-  setEditorState: PropTypes.func,
+  input: PropTypes.object,
+  meta: PropTypes.object,
 };
 
-export default RichEditor;
+export default connect()(RichEditor);
