@@ -23,6 +23,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import getInitials from 'utils/getInitials';
 import Label from 'components/Label';
+import { categories } from './data';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -123,12 +124,18 @@ const AnnouncementCard = props => {
           </Typography>
         </div>
         <div className={classes.tags}>
-          {announcement.projectAbout.tags.map(tag => (
-            // <Label color={tag.color} key={tag.text}>
-            //   {tag.text}
-            // </Label>
-            <Label key={tag}>{tag}</Label>
-          ))}
+          {announcement.projectAbout.category.map(value =>
+            Object.values(categories).map(cat => {
+              if (cat.text === value) {
+                return (
+                  <Label color={cat.color} key={cat.text}>
+                    {cat.text}
+                  </Label>
+                );
+              }
+              return null;
+            }),
+          )}
         </div>
         <Divider />
         <div className={classes.details}>
@@ -140,14 +147,23 @@ const AnnouncementCard = props => {
           >
             <Grid item>
               <Typography variant="h5">
-                {announcement.project.toUpperCase()}
+                {announcement.projectSelector.project.toUpperCase()}
               </Typography>
               <Typography variant="body2">Project</Typography>
             </Grid>
-            <Grid item>
-              <Typography variant="h5">NGC</Typography>
+            {/* <Grid item>
+              <Typography variant="h5">
+                {Object.entries(announcement.projectSelector).map(
+                  ([key, value]) => {
+                    if (key !== 'project' && value === true) {
+                      return `${key} `;
+                    }
+                    return null;
+                  },
+                )}
+              </Typography>
               <Typography variant="body2">Location</Typography>
-            </Grid>
+            </Grid> */}
             <Grid item>
               {liked ? (
                 <Tooltip title="Unlike">

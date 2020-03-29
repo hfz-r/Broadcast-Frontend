@@ -22,11 +22,12 @@ const ProjectSelector = props => {
 
   return (
     <Card className={clsx(classes.root, className)}>
-      <CardHeader title="Select location &amp; project" />
+      {/* <CardHeader title="Select location &amp; project" /> */}
+      <CardHeader title="Select project" />
       <CardContent>
-        <div className={classes.formGroup}>
+        {/* <div className={classes.formGroup}>
           <Location label="Location" {...rest} />
-        </div>
+        </div> */}
         <div className={classes.formGroup}>
           <Field
             name="project"

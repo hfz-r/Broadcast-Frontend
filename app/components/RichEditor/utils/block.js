@@ -12,12 +12,12 @@ export function setBlockData(editorState, data) {
 }
 
 const newBlockRenderMap = Map({
-  unstyled: {
-    element: 'div',
-  },
-  paragraph: {
-    element: 'p',
-  },
+  // unstyled: {
+  //   element: 'p',
+  // },
+  // paragraph: {
+  //   element: 'p',
+  // },
 });
 
 export const blockRenderMap = DefaultDraftBlockRenderMap.merge(

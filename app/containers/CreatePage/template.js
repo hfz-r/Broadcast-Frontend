@@ -152,9 +152,7 @@ const AnnouncementCreate = props => {
       <Backdrop
         className={classes.backdrop}
         open={openBackdrop}
-        onClick={() => {
-          setOpenBackdrop(false);
-        }}
+        onClick={() => setOpenBackdrop(!submitting)}
       >
         <CircularProgress color="inherit" />
       </Backdrop>

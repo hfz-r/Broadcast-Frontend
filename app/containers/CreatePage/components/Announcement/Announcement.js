@@ -78,6 +78,12 @@ const AboutAnnouncement = props => {
     });
   }, []);
 
+  const handleKeyDown = e => {
+    if (e.key === 'Enter') {
+      formActions.arrayPush(formName, `${formSection}.tags`, e.target.value);
+    }
+  };
+
   return (
     <Card className={clsx(classes.root, className)}>
       <CardHeader title="About the announcement" />
@@ -117,6 +123,7 @@ const AboutAnnouncement = props => {
               name="tag"
               label="Tags"
               component={RenderTextField}
+              onKeyDown={handleKeyDown}
               className={classes.flexGrow}
               variant="outlined"
             />

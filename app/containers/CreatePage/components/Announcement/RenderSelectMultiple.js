@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import { Error, Warning, Info, Help } from '@material-ui/icons';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   labels: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     color: '#e53935',
   },
   others: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: colors.grey[600],
   },
   info: {
     backgroundColor: colors.lightBlue[600],
@@ -35,9 +35,9 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: colors.orange[900],
   },
   error: {
-    backgroundColor: theme.palette.error.main,
+    backgroundColor: colors.red[600],
   },
-}));
+});
 
 const MenuProps = {
   PaperProps: {

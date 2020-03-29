@@ -14,7 +14,6 @@ import { ToggleButtonGroup, ToggleButton } from '@material-ui/lab';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { AnnouncementCard, Paginate } from 'components';
-import { data } from './data';
 
 const useStyles = makeStyles(theme => ({
   root: {},
