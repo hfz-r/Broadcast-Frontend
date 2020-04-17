@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Divider, Typography } from '@material-ui/core';
-import { NavLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { Image, Navigation } from 'components';
-import navigationConfig from './Config';
+import NavbarConfig from './Config';
 
 const useStyles = makeStyles(theme => ({
   content: {
@@ -37,18 +37,17 @@ const NavbarContent = ({ location, userSession }) => {
   return (
     <div className={classes.content}>
       <div className={classes.brand}>
-        <NavLink to="/profile/1/">
+        <RouterLink to="/home">
           <Image className={classes.logo} name="brdcst-logo-transparent-3" />
-        </NavLink>
+        </RouterLink>
         <Typography className={classes.name} variant="h4">
-          {userSession.first_name.toLowerCase()}{' '}
-          {userSession.last_name.toLowerCase()}
+          {userSession.first_name} {userSession.last_name}
         </Typography>
         <Typography variant="body2">{userSession.bio}</Typography>
       </div>
       <Divider className={classes.divider} />
       <nav className={classes.navigation}>
-        {navigationConfig.map(list => (
+        {NavbarConfig.map(list => (
           <Navigation
             component="div"
             location={location}

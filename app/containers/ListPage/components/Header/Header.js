@@ -26,7 +26,7 @@ const Header = props => {
             Browse announcements
           </Typography>
           <Typography component="h1" variant="h3">
-            See the latest announcements
+            See the list of announcements
           </Typography>
         </Grid>
         <Grid item>

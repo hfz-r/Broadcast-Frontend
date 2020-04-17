@@ -3,7 +3,7 @@ import { merge, path, pathOr, prop } from 'ramda';
 import axios from 'axios';
 import queryString from 'query-string';
 
-axios.defaults.withCredentials = false;
+axios.defaults.withCredentials = true;
 axios.defaults.timeout = Infinity;
 
 export default ({ apiKey }) => {

@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {
-  convertFromHTML,
   ContentState,
   Editor,
   EditorState,
@@ -10,7 +9,7 @@ import {
   Modifier,
   getDefaultKeyBinding,
 } from 'draft-js';
-import { stateToHTML } from 'draft-js-export-html';
+import { stateToMarkdown } from 'draft-js-export-markdown';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
 import { Paper, Divider } from '@material-ui/core';
@@ -99,16 +98,6 @@ const RichEditor = props => {
   const classes = useStyles();
 
   useEffect(() => {
-    if (input.value) {
-      const blocksFromHTML = convertFromHTML(input.value);
-      const content = ContentState.createFromBlockArray(blocksFromHTML);
-
-      const state = EditorState.createWithContent(content);
-      setEditorState(state);
-    }
-  }, []);
-
-  useEffect(() => {
     if (pristine) {
       const clearState = EditorState.push(
         editorState,
@@ -148,7 +137,7 @@ const RichEditor = props => {
   };
 
   const handleEditorChange = state => {
-    input.onChange(stateToHTML(editorState.getCurrentContent()));
+    input.onChange(stateToMarkdown(editorState.getCurrentContent()));
     setEditorState(state);
   };
 

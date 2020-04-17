@@ -9,7 +9,7 @@ export default ({ api }) => {
   const fetchMessages = function* _() {
     try {
       yield put(A.fetchMessagesLoading());
-      const messages = yield call(api.fetchMessage);
+      const messages = yield call(api.fetchMessages);
       yield put(A.fetchMessagesSuccess(messages));
     } catch (e) {
       yield put(A.fetchMessagesFailure(e));
@@ -36,5 +36,15 @@ export default ({ api }) => {
     }
   };
 
-  return { fetchMessages, submitMessage };
+  const fetchMessage = function* _(action) {
+    try {
+      yield put(A.fetchMessageLoading());
+      const message = yield call(api.fetchMessage, action.payload);
+      yield put(A.fetchMessageSuccess(message));
+    } catch (e) {
+      yield put(A.fetchMessageFailure(e));
+    }
+  };
+
+  return { fetchMessages, submitMessage, fetchMessage };
 };

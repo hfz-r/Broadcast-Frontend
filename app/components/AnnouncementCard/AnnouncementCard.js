@@ -110,7 +110,7 @@ const AnnouncementCard = props => {
           <Link
             color="textPrimary"
             component={RouterLink}
-            to={`/announcements/${announcement.message_id}/overview`}
+            to={`/announcements/${announcement.slug}/overview`}
             variant="h5"
           >
             {announcement.projectAbout.title}
@@ -119,7 +119,7 @@ const AnnouncementCard = props => {
       />
       <CardContent className={classes.content}>
         <div className={classes.description}>
-          <Typography colo="textSecondary" variant="subtitle2">
+          <Typography color="textSecondary" variant="subtitle2">
             {trimString(announcement.projectAbout.description, 30)}
           </Typography>
         </div>
@@ -128,7 +128,7 @@ const AnnouncementCard = props => {
             Object.values(categories).map(cat => {
               if (cat.text === value) {
                 return (
-                  <Label color={cat.color} key={cat.text}>
+                  <Label key={cat.text} color={cat.color}>
                     {cat.text}
                   </Label>
                 );
@@ -151,19 +151,6 @@ const AnnouncementCard = props => {
               </Typography>
               <Typography variant="body2">Project</Typography>
             </Grid>
-            {/* <Grid item>
-              <Typography variant="h5">
-                {Object.entries(announcement.projectSelector).map(
-                  ([key, value]) => {
-                    if (key !== 'project' && value === true) {
-                      return `${key} `;
-                    }
-                    return null;
-                  },
-                )}
-              </Typography>
-              <Typography variant="body2">Location</Typography>
-            </Grid> */}
             <Grid item>
               {liked ? (
                 <Tooltip title="Unlike">
@@ -195,7 +182,7 @@ const AnnouncementCard = props => {
                 className={classes.learnMoreButton}
                 component={RouterLink}
                 size="small"
-                to={`/announcements/${announcement.message_id}/overview`}
+                to={`/announcements/${announcement.slug}/overview`}
               >
                 Learn more
               </Button>

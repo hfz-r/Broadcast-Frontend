@@ -4,30 +4,25 @@ import clsx from 'clsx';
 import { Field } from 'redux-form';
 import { makeStyles } from '@material-ui/styles';
 import { Card, CardHeader, CardContent } from '@material-ui/core';
-import Location from './Location';
 import RenderOptions from './RenderOptions';
 import { required } from '../../validators';
 
 const useStyles = makeStyles(theme => ({
   root: {},
   formGroup: {
-    marginBottom: theme.spacing(3),
+    marginBottom: theme.spacing(0),
   },
 }));
 
 const ProjectSelector = props => {
-  const { className, ...rest } = props;
+  const { className } = props;
 
   const classes = useStyles();
 
   return (
     <Card className={clsx(classes.root, className)}>
-      {/* <CardHeader title="Select location &amp; project" /> */}
       <CardHeader title="Select project" />
       <CardContent>
-        {/* <div className={classes.formGroup}>
-          <Location label="Location" {...rest} />
-        </div> */}
         <div className={classes.formGroup}>
           <Field
             name="project"

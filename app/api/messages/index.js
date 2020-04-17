@@ -1,5 +1,5 @@
 export default ({ apiUrl, get, post }) => {
-  const fetchMessage = () =>
+  const fetchMessages = () =>
     get({
       url: apiUrl,
       endPoint: '/messages',
@@ -13,5 +13,12 @@ export default ({ apiUrl, get, post }) => {
       data: payload,
     });
 
-  return { createMessage, fetchMessage };
+  const fetchMessage = ({ slug }) =>
+    get({
+      url: apiUrl,
+      endPoint: `/messages/${slug}`,
+      contentType: 'application/json',
+    });
+
+  return { fetchMessages, createMessage, fetchMessage };
 };

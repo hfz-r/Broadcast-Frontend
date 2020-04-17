@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Redirect } from 'react-router-dom';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { selectors } from 'stores';
-
 import DashboardLayout from 'layouts/Dashboard';
-import HomePage from 'containers/HomePage';
+import PublicLayout from 'layouts/Public';
+import Login from 'containers/Login';
 import Dashboard from 'containers/DashboardPage';
 import AnnouncementList from 'containers/ListPage';
 import AnnouncementCreate from 'containers/CreatePage';
@@ -17,8 +16,8 @@ const App = props => {
 
   return (
     <Switch>
-      <DashboardLayout path="/home" component={HomePage} />
-      <DashboardLayout path="/dashboard" component={Dashboard} />
+      <PublicLayout path="/login" component={Login} />
+      <DashboardLayout path="/home" component={Dashboard} />
       <DashboardLayout
         path="/announcements/browse"
         component={AnnouncementList}
@@ -28,17 +27,17 @@ const App = props => {
         component={AnnouncementCreate}
       />
       <DashboardLayout
-        path="/announcements/:id"
+        path="/announcements/:slug"
         component={AnnouncementDetails}
         exact
       />
       <DashboardLayout
-        path="/announcements/:id/:tab"
+        path="/announcements/:slug/:tab"
         component={AnnouncementDetails}
         exact
       />
       {isAuthenticated ? (
-        <Redirect from="/" to="/dashboard" />
+        <Redirect from="/" to="/home" />
       ) : (
         <Redirect from="/" to="/login" />
       )}
@@ -50,8 +49,16 @@ App.propTypes = {
   isAuthenticated: PropTypes.bool,
 };
 
-const mapStateToProps = createStructuredSelector({
-  isAuthenticated: selectors.auth.makeSelectAuthenticated(),
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps)(App);
+const withConnect = connect(
+  mapStateToProps,
+  undefined,
+);
+
+export default compose(
+  withConnect,
+  memo,
+)(App);

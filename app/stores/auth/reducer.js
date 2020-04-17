@@ -1,45 +1,30 @@
 import produce from 'immer';
-
-import {
-  AUTHENTICATE,
-  LOGIN,
-  LOGIN_FAILURE,
-  LOGIN_LOADING,
-  LOGIN_SUCCESS,
-} from './constants';
+import Remote from 'utils/remote';
+import * as T from './constants';
 
 export const initialState = {
-  isAuthenticated: false,
   isLoggingIn: false,
-  login: [],
-  userSession: {
-    username: 'hfz-r',
-    first_name: 'Hafiz',
-    last_name: 'R',
-    email: 'admin@brdcst.io',
-    image: 'https://api.adorable.io/avatars/200/hafiz@adorable.io.png',
-    bio: 'Admin',
-    role: 'ADMIN', // ['GUEST', 'USER', 'ADMIN']
-  },
+  isAuthenticated: false,
+  login: Remote.NotAsked,
 };
 
 /* eslint-disable default-case, no-param-reassign */
 const authReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case LOGIN:
+      case T.LOGIN:
         draft.isLoggingIn = true;
         break;
-      case LOGIN_LOADING:
-        draft.login = [];
+      case T.LOGIN_LOADING:
+        draft.login = Remote.Loading;
         break;
-      case LOGIN_SUCCESS:
-        draft.login = action.payload;
+      case T.LOGIN_SUCCESS:
+        draft.login = Remote.Success(action.payload);
         break;
-      case LOGIN_FAILURE:
-        draft.login = action.payload;
+      case T.LOGIN_FAILURE:
+        draft.login = Remote.Failure(action.payload);
         break;
-      case AUTHENTICATE:
+      case T.AUTHENTICATE:
         draft.isAuthenticated = true;
         break;
     }

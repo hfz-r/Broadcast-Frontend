@@ -1,7 +1,12 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
+import serializer from './utils/Serializer';
 import createReducer from './reducers';
+
+const devToolsConfig = {
+  serialize: serializer,
+};
 
 export default function configureStore(initialState = {}, history) {
   let composeEnhancers = compose;
@@ -12,7 +17,9 @@ export default function configureStore(initialState = {}, history) {
   if (process.env.NODE_ENV !== 'production' && typeof window === 'object') {
     /* eslint-disable no-underscore-dangle */
     if (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
-      composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({});
+      composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
+        devToolsConfig,
+      );
 
     // NOTE: Uncomment the code below to restore support for Redux Saga
     // Dev Tools once it supports redux-saga version 1.x.x

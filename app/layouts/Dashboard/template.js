@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, styled } from '@material-ui/styles';
 import ErrorBoundary from 'providers/ErrorBoundaryProvider';
+import Modals from 'containers/Modals';
 import { Snackbar } from 'components';
 import { NavBar, TopBar, Page } from './components';
 
@@ -43,6 +44,7 @@ const DashboardLayout = ({ children }) => {
     <div className={classes.root}>
       <ErrorBoundary>
         <Snackbar />
+        <Modals />
         <TopBar className={classes.topBar} />
         <Wrapper>
           <NavBar className={classes.navBar} />

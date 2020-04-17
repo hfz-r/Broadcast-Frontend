@@ -91,6 +91,7 @@ export const RenderSelectMultiple = ({ label, input }) => {
                   return (
                     <Chip
                       key={value}
+                      size="small"
                       className={clsx(
                         classes.label,
                         classes[cat.text.toLowerCase()],

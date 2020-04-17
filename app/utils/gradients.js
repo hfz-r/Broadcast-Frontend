@@ -9,6 +9,7 @@ const indigo = buildGradient(colors.indigo[400], colors.indigo[600]);
 const green = buildGradient(colors.green[400], colors.green[600]);
 const orange = buildGradient(colors.orange[400], colors.orange[700]);
 const red = buildGradient(colors.red[500], colors.red[700]);
+const custom = buildGradient('#019688', '#3caea4');
 
 export default {
   grey,
@@ -17,4 +18,5 @@ export default {
   green,
   orange,
   red,
+  custom,
 };

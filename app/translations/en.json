@@ -4,8 +4,13 @@
   "container.AnnouncementCreate.button.clear": "Clear",
   "container.AnnouncementCreate.button.createannouncement": "Create announcement",
   "container.AnnouncementCreate.formhelper.required": "Required",
-  "container.AnnouncementList.onload.failure": "Something went wrong. Please refresh!",
+  "container.Announcements.onload.failure": "Something went wrong. Please refresh!",
   "components.snackbar.create_announcement_error": "Failed to create announcement",
   "components.snackbar.create_announcement_success": "Announcement created successfully!",
-  "components.snackbar.unknown_error": "An error has occurred"
+  "components.snackbar.unknown_error": "An error has occurred",
+  "modals.autodisconnection.cancel": "Cancel",
+  "modals.autodisconnection.explain": "You've been inactive for {duration} minutes.",
+  "modals.autodisconnection.explain2": "Click 'Cancel' if you don't want to be logged out automatically.",
+  "modals.autodisconnection.logout": "Log me out",
+  "modals.autodisconnection.title": "Are you still there?"
 }

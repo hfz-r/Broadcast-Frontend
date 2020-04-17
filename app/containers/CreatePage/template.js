@@ -21,7 +21,6 @@ import {
   Preferences,
   ProjectSelector,
 } from './components';
-
 import M from './messages';
 
 const useStyles = makeStyles(theme => ({
@@ -65,18 +64,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const AnnouncementCreate = props => {
-  const { invalid, submitting, busy, apiError, ...rest } = props;
+  const { invalid, pristine, submitting, busy, apiError, ...rest } = props;
   const { reset, handleSubmit, formActions } = rest;
 
   const classes = useStyles();
   const [openBackdrop, setOpenBackdrop] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
-  const [locationError, setLocationError] = useState(false);
 
   useEffect(() => setOpenBackdrop(busy), [busy]);
   useEffect(() => setOpenAlert(!!apiError), [!!apiError]);
-
-  const handleLocationError = error => setLocationError(error);
 
   return (
     <Page className={classes.root} title="Announcement Create">
@@ -106,19 +102,14 @@ const AnnouncementCreate = props => {
               ) : (
                 <ul>
                   {Object.entries(apiError).map(([key, value]) => (
-                    <li key={key}>
-                      {`'${key}'`} {value}
-                    </li>
+                    <li key={key}>{value}</li>
                   ))}
                 </ul>
               ))}
           </Alert>
         </Collapse>
         <FormSection name="projectSelector">
-          <ProjectSelector
-            className={classes.selectProject}
-            onLocationError={handleLocationError}
-          />
+          <ProjectSelector className={classes.selectProject} />
         </FormSection>
         <FormSection name="projectAbout">
           <AboutAnnouncement
@@ -136,13 +127,17 @@ const AnnouncementCreate = props => {
           <Preferences className={classes.preferences} />
         </FormSection>
         <div className={classes.actions}>
-          <Button variant="contained" onClick={reset}>
+          <Button
+            variant="contained"
+            disabled={pristine || submitting}
+            onClick={reset}
+          >
             <FormattedMessage {...M.buttonClear} />
           </Button>
           <Button
             color="primary"
             variant="contained"
-            disabled={invalid || submitting || busy || locationError}
+            disabled={invalid || submitting || busy}
             onClick={() => formActions.submit('createProject')}
           >
             <FormattedMessage {...M.buttonCreateAnnouncement} />
@@ -162,6 +157,7 @@ const AnnouncementCreate = props => {
 
 AnnouncementCreate.propTypes = {
   invalid: PropTypes.bool,
+  pristine: PropTypes.bool,
   submitting: PropTypes.bool,
   busy: PropTypes.bool,
   apiError: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),

@@ -9,11 +9,11 @@ import {
   Card,
   CardContent,
   CardHeader,
+  Chip,
   List,
   ListItem,
   Typography,
 } from '@material-ui/core';
-import { Label } from 'components';
 import getInitials from 'utils/getInitials';
 
 const useStyles = makeStyles(theme => ({
@@ -49,10 +49,14 @@ const Holder = props => {
             alt="Author"
             className={classes.avatar}
             component={RouterLink}
-            src={announcement.author.avatar}
+            src={announcement.author.image}
             to="/profile/1/timeline"
           >
-            {getInitials(announcement.author.name)}
+            {getInitials(
+              `${announcement.author.first_name} ${
+                announcement.author.last_name
+              }`,
+            )}
           </Avatar>
         }
         className={classes.header}
@@ -63,7 +67,9 @@ const Holder = props => {
             to="/profile/1/timeline"
             variant="h5"
           >
-            {announcement.author.name}
+            {`${announcement.author.first_name} ${
+              announcement.author.last_name
+            }`}
           </Typography>
         }
         title={
@@ -77,28 +83,28 @@ const Holder = props => {
           <ListItem className={classes.listItem} disableGutters divider>
             <Typography variant="subtitle2">End Date</Typography>
             <Typography variant="h6">
-              {moment(announcement.end_date).format('DD MMM YYYY')}
+              {moment(announcement.projectAbout.end_date).format('DD MMM YYYY')}
             </Typography>
           </ListItem>
           <ListItem className={classes.listItem} disableGutters divider>
             <Typography variant="subtitle2">Project</Typography>
-            <Typography variant="h6">{announcement.project}</Typography>
-          </ListItem>
-          <ListItem className={classes.listItem} disableGutters divider>
-            <Typography variant="subtitle2">Tags</Typography>
-            <div className={classes.tags}>
-              {announcement.tags.map(tag => (
-                <Label color={tag.color} key={tag.text}>
-                  {tag.text}
-                </Label>
-              ))}
-            </div>
+            <Typography variant="h6">
+              {announcement.projectSelector.project.toUpperCase()}
+            </Typography>
           </ListItem>
           <ListItem className={classes.listItem} disableGutters divider>
             <Typography variant="subtitle2">Last Update</Typography>
             <Typography variant="h6">
               {moment(announcement.updated_at).format('DD MMM YYYY')}
             </Typography>
+          </ListItem>
+          <ListItem className={classes.listItem} disableGutters divider>
+            <Typography variant="subtitle2">Tags</Typography>
+            <div className={classes.tags}>
+              {announcement.projectAbout.tags.map(tag => (
+                <Chip key={tag} label={tag} />
+              ))}
+            </div>
           </ListItem>
         </List>
       </CardContent>

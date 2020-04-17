@@ -28,7 +28,7 @@ export const getAlertContent = (message, data = undefined, handleClose, id) => {
       return buildMessageTemplate(
         <FormattedMessage
           id="components.snackbar.create_announcement_error"
-          defaultMessage="Failed to create announcement"
+          defaultMessage="Failed to create announcement."
         />,
       );
     case C.CREATE_ANNOUNCEMENT_SUCCESS:
@@ -36,6 +36,13 @@ export const getAlertContent = (message, data = undefined, handleClose, id) => {
         <FormattedMessage
           id="components.snackbar.create_announcement_success"
           defaultMessage="Announcement created successfully!"
+        />,
+      );
+    case C.LOGIN_ERROR:
+      return buildMessageTemplate(
+        <FormattedMessage
+          id="components.snackbar.login_error"
+          defaultMessage="Failed to login."
         />,
       );
     default:

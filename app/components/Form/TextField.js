@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { TextField } from '@material-ui/core';
 
 export const RenderTextField = ({
+  err,
   label,
   input,
   meta: { touched, invalid, error },
@@ -10,7 +11,7 @@ export const RenderTextField = ({
 }) => (
   <TextField
     label={label}
-    error={touched && invalid}
+    error={!!err || (touched && invalid)}
     helperText={touched && error}
     {...input}
     {...custom}
@@ -18,6 +19,7 @@ export const RenderTextField = ({
 );
 
 RenderTextField.propTypes = {
+  err: PropTypes.string,
   label: PropTypes.string,
   input: PropTypes.object,
   meta: PropTypes.object,

@@ -30,3 +30,20 @@ export const createMessagesFailure = error => ({
   type: T.CREATE_MESSAGE_FAILURE,
   payload: { error },
 });
+
+export const fetchMessage = slug => ({
+  type: T.FETCH_MESSAGE,
+  payload: { slug },
+});
+
+export const fetchMessageLoading = () => ({ type: T.FETCH_MESSAGE_LOADING });
+
+export const fetchMessageSuccess = message => ({
+  type: T.FETCH_MESSAGE_SUCCESS,
+  payload: message,
+});
+
+export const fetchMessageFailure = error => ({
+  type: T.FETCH_MESSAGE_FAILURE,
+  payload: error,
+});

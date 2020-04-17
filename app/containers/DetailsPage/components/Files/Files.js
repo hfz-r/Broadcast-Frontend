@@ -30,7 +30,7 @@ const Files = props => {
       </Card>
       <Grid className={classes.files} container spacing={3}>
         {files.map(file => (
-          <Grid item key={file.id} lg={4} md={4} sm={6} xs={12}>
+          <Grid item key={file.file_id} lg={4} md={4} sm={6} xs={12}>
             <FileCard file={file} />
           </Grid>
         ))}

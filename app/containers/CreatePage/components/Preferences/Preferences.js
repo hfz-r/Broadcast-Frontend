@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { Field } from 'redux-form';
 import { makeStyles } from '@material-ui/styles';
 import { Card, CardHeader, CardContent, Typography } from '@material-ui/core';
-import { RenderCheckbox } from './RenderCheckbox';
+import { RenderCheckbox } from 'components/Form';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -25,21 +25,21 @@ const Preferences = props => {
       <CardHeader title="Preferences" />
       <CardContent>
         <Typography gutterBottom variant="h6">
-          Privacy
+          Text placeholder
         </Typography>
         <Typography variant="body2">
-          You will recieve emails in your email address
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </Typography>
         <div className={classes.options}>
           <Field
             name="cb1"
-            label="Lorem ipsum dolor sit"
+            label="Lorem ipsum dolor sit amet"
             component={RenderCheckbox}
             color="primary"
           />
           <Field
             name="cb2"
-            label="Lorem ipsum dolor sit"
+            label="Consectetur adipiscing elit"
             component={RenderCheckbox}
             color="primary"
           />

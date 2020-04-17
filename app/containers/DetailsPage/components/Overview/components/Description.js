@@ -9,25 +9,24 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Description = props => {
-  const { className, ...rest } = props;
+  const { description, className, ...rest } = props;
 
   const classes = useStyles();
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
       <CardContent>
-        <Typography variant="h4">Description:</Typography>
-        <Typography variant="body1">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis,
-          eros id porta tempus, elit lectus dignissim dolor, non semper mauris
-          magna eu quam.
+        <Typography gutterBottom variant="h4" component="h2">
+          Description
         </Typography>
+        <Typography variant="body1">{description}</Typography>
       </CardContent>
     </Card>
   );
 };
 
 Description.propTypes = {
+  description: PropTypes.string,
   className: PropTypes.string,
 };
 

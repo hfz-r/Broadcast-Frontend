@@ -4,7 +4,7 @@
 
 import produce from 'immer';
 import { memoryHistory } from 'react-router-dom';
-import identity from 'lodash/identity';
+import { identity } from 'ramda';
 
 import configureStore from '../../configureStore';
 

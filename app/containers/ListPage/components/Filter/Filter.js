@@ -53,13 +53,7 @@ const Filter = props => {
 
   const classes = useStyles();
   const [inputValue, setInputValue] = useState('');
-  const [chips, setChips] = useState([
-    'Operation',
-    'QA',
-    'NGC',
-    'MPS',
-    'Warning',
-  ]);
+  const [chips, setChips] = useState(['Error', 'MPS', 'Others']);
 
   const handleInputChange = event => {
     event.persist();

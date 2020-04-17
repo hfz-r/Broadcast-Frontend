@@ -1,26 +1,28 @@
-import {
-  AUTHENTICATE,
-  LOGIN,
-  LOGIN_FAILURE,
-  LOGIN_LOADING,
-  LOGIN_SUCCESS,
-  LOGOUT,
-} from './constants';
+import * as T from './constants';
 
-export const authenticate = () => ({ type: AUTHENTICATE });
+export const authenticate = () => ({ type: T.AUTHENTICATE });
+
+export const deauthorizeBrowser = () => ({ type: T.DEAUTHORIZE_BROWSER });
 
 export const login = (username, password) => ({
-  type: LOGIN,
+  type: T.LOGIN,
   payload: { username, password },
 });
 
-export const loginLoading = () => ({ type: LOGIN_LOADING });
+export const loginLoading = () => ({ type: T.LOGIN_LOADING });
 
-export const loginSuccess = () => ({ type: LOGIN_SUCCESS, payload: {} });
-
-export const loginFailure = err => ({
-  type: LOGIN_FAILURE,
-  payload: { err },
+export const loginSuccess = guid => ({
+  type: T.LOGIN_SUCCESS,
+  payload: guid,
 });
 
-export const logout = () => ({ type: LOGOUT });
+export const loginFailure = error => ({
+  type: T.LOGIN_FAILURE,
+  payload: { error },
+});
+
+export const logout = () => ({ type: T.LOGOUT });
+
+export const logoutClearReduxStore = () => ({
+  type: T.LOGOUT_CLEAR_REDUX_STORE,
+});

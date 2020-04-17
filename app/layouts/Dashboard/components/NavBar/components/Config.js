@@ -13,7 +13,7 @@ export default [
     pages: [
       {
         title: 'Dashboard',
-        href: '/dashboard',
+        href: '/home',
         icon: DashboardIcon,
       },
       {
@@ -22,30 +22,29 @@ export default [
         icon: AddAlertOutlinedIcon,
         children: [
           {
-            title: 'Browse',
-            href: '/announcements/browse',
-          },
-          {
             title: 'Create',
             href: '/announcements/create',
           },
           {
-            title: 'Overview',
-            href: '/announcements/1/overview',
+            title: 'Browse',
+            href: '/announcements/browse',
           },
+          // {
+          //   title: 'Overview',
+          //   href: '/announcements/so-failed-to-save/overview',
+          // },
         ],
       },
-
-      {
-        title: 'Inbox',
-        href: '/inbox',
-        icon: MailIcon,
-        label: () => (
-          <Label color={colors.red[500]} shape="rounded">
-            2
-          </Label>
-        ),
-      },
+      // {
+      //   title: 'Inbox',
+      //   href: '/inbox',
+      //   icon: MailIcon,
+      //   label: () => (
+      //     <Label color={colors.red[500]} shape="rounded">
+      //       2
+      //     </Label>
+      //   ),
+      // },
     ],
   },
   {
@@ -57,21 +56,29 @@ export default [
         icon: PersonIcon,
         children: [
           {
-            title: 'Timeline',
-            href: '/profile/1/timeline',
+            title: 'Child 1',
+            href: '/profile/1/child1',
           },
           {
-            title: 'Connections',
-            href: '/profile/1/connections',
+            title: 'Child 2',
+            href: '/profile/1/child2',
           },
-          {
-            title: 'Projects',
-            href: '/profile/1/projects',
-          },
-          {
-            title: 'Reviews',
-            href: '/profile/1/reviews',
-          },
+          // {
+          //   title: 'Timeline',
+          //   href: '/profile/1/timeline',
+          // },
+          // {
+          //   title: 'Connections',
+          //   href: '/profile/1/connections',
+          // },
+          // {
+          //   title: 'Projects',
+          //   href: '/profile/1/projects',
+          // },
+          // {
+          //   title: 'Reviews',
+          //   href: '/profile/1/reviews',
+          // },
         ],
       },
       {
@@ -80,21 +87,29 @@ export default [
         icon: SettingsIcon,
         children: [
           {
-            title: 'General',
-            href: '/settings/general',
+            title: 'Child 1',
+            href: '/settings/child1',
           },
           {
-            title: 'Subscription',
-            href: '/settings/subscription',
+            title: 'Child 2',
+            href: '/settings/child2',
           },
-          {
-            title: 'Notifications',
-            href: '/settings/notifications',
-          },
-          {
-            title: 'Security',
-            href: '/settings/security',
-          },
+          // {
+          //   title: 'General',
+          //   href: '/settings/general',
+          // },
+          // {
+          //   title: 'Subscription',
+          //   href: '/settings/subscription',
+          // },
+          // {
+          //   title: 'Notifications',
+          //   href: '/settings/notifications',
+          // },
+          // {
+          //   title: 'Security',
+          //   href: '/settings/security',
+          // },
         ],
       },
     ],

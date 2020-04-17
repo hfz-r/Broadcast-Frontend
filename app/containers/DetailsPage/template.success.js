@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
@@ -29,27 +29,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const AnnouncementDetails = props => {
-  const { computedMatch, router } = props;
+  const { computedMatch, router, ...rest } = props;
+  const { slug, tab } = computedMatch.params;
+  const { announcement, dataCount } = rest;
+
   const classes = useStyles();
-  const { id, tab } = computedMatch.params;
-  const [openAlert, setOpenAlert] = useState(true);
-  const [announcement, setAnnouncement] = useState(null);
-
-  useEffect(() => {
-    let mounted = true;
-
-    const fetchAnnouncement = () => {
-      if (mounted) {
-        setAnnouncement(data);
-      }
-    };
-
-    fetchAnnouncement();
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
+  const [openAlert, setOpenAlert] = useState(false);
 
   const handleAlertClose = () => {
     setOpenAlert(false);
@@ -62,12 +47,12 @@ const AnnouncementDetails = props => {
   const tabs = [
     { value: 'overview', label: 'Overview' },
     { value: 'files', label: 'Files' },
-    { value: 'activity', label: 'Activity' },
-    { value: 'subscribers', label: 'Subscribers' },
+    // { value: 'activity', label: 'Activity' },
+    // { value: 'subscribers', label: 'Subscribers' },
   ];
 
   if (!tab) {
-    return <Redirect to={`/announcements/${id}/overview`} />;
+    return <Redirect to={`/announcements/${slug}/overview`} />;
   }
 
   if (!tabs.find(t => t.value === tab)) {
@@ -80,7 +65,7 @@ const AnnouncementDetails = props => {
 
   return (
     <Page className={classes.root} title="Announcement Details">
-      <Header announcement={announcement} />
+      <Header announcement={announcement} announcementCount={dataCount} />
       <Tabs
         className={classes.tabs}
         onChange={handleTabsChange}
@@ -102,13 +87,13 @@ const AnnouncementDetails = props => {
       )}
       <div className={classes.content}>
         {tab === 'overview' && <Overview announcement={announcement} />}
-        {tab === 'files' && <Files files={announcement.files} />}
-        {tab === 'activity' && (
+        {tab === 'files' && <Files files={announcement.projectExtras.files} />}
+        {/* {tab === 'activity' && (
           <Activities activities={announcement.activities} />
         )}
         {tab === 'subscribers' && (
           <Subscribers subscribers={announcement.subscribers} />
-        )}
+        )} */}
       </div>
     </Page>
   );
@@ -117,6 +102,8 @@ const AnnouncementDetails = props => {
 AnnouncementDetails.propTypes = {
   router: PropTypes.object.isRequired,
   computedMatch: PropTypes.object.isRequired,
+  announcement: PropTypes.object,
+  dataCount: PropTypes.number,
 };
 
 export default AnnouncementDetails;

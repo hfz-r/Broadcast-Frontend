@@ -15,16 +15,18 @@ const Body = props => {
   const classes = useStyles();
 
   return (
-    <Card {...rest} className={clsx(classes.root, className)}>
-      <CardContent>
-        <Markdown source={body} />
-      </CardContent>
-    </Card>
+    body && (
+      <Card {...rest} className={clsx(classes.root, className)}>
+        <CardContent>
+          <Markdown source={body} />
+        </CardContent>
+      </Card>
+    )
   );
 };
 
 Body.propTypes = {
-  body: PropTypes.string.isRequired,
+  body: PropTypes.string,
   className: PropTypes.string,
 };
 

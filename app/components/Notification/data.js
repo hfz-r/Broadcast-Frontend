@@ -4,19 +4,13 @@ import moment from 'moment';
 export const data = [
   {
     id: uuid(),
-    title: 'New order has been received',
-    type: 'order',
-    created_at: moment().subtract(2, 'hours'),
-  },
-  {
-    id: uuid(),
-    title: 'New customer is registered',
+    title: 'New user is registered',
     type: 'user',
     created_at: moment().subtract(1, 'day'),
   },
   {
     id: uuid(),
-    title: 'Project has been approved',
+    title: 'Project has been added',
     type: 'project',
     created_at: moment().subtract(3, 'days'),
   },

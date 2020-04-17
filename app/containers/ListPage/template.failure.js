@@ -24,7 +24,7 @@ const Failure = props => {
       <Typography align="center" variant="h4" color="error">
         {prop('message', props.status) || (
           <FormattedMessage
-            id="container.AnnouncementList.onload.failure"
+            id="container.Announcements.onload.failure"
             defaultMessage="Something went wrong. Please refresh!"
           />
         )}

@@ -9,7 +9,7 @@ require('shelljs/global');
 const fs = require('fs');
 const nodeGlob = require('glob');
 const { transform } = require('@babel/core');
-const get = require('lodash/get');
+const R = require('ramda');
 
 const animateProgress = require('./helpers/progress');
 const addCheckmark = require('./helpers/checkmark');
@@ -95,7 +95,7 @@ const extractFromFile = async filename => {
     const code = await readFile(filename);
 
     const output = await transform(code, { filename, presets, plugins });
-    const messages = get(output, 'metadata.react-intl.messages', []);
+    const messages = R.path(['metadata', 'react-intl', 'messages'], output);
 
     for (const message of messages) {
       for (const locale of appLocales) {

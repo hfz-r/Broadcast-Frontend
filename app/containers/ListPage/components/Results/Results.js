@@ -54,7 +54,7 @@ const useStyles = makeStyles(theme => ({
 
 const Announcements = props => {
   const { className, announcements, ...rest } = props;
-  const { messages, messagesCount } = announcements;
+  const { messages, messageCount } = announcements;
 
   const classes = useStyles();
   const sortRef = useRef(null);
@@ -83,7 +83,7 @@ const Announcements = props => {
     <div {...rest} className={clsx(classes.root, className)}>
       <div className={classes.header}>
         <Typography className={classes.title} variant="h5">
-          Showing {messagesCount} announcements
+          Showing {messageCount} announcements
         </Typography>
         <div className={classes.actions}>
           <Button
@@ -115,7 +115,7 @@ const Announcements = props => {
             sm={mode === 'grid' ? 6 : 12}
             xs={12}
           >
-            <AnnouncementCard announcement={message} />
+            <AnnouncementCard key={message.message_id} announcement={message} />
           </Grid>
         ))}
       </Grid>

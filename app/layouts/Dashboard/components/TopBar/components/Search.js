@@ -64,13 +64,7 @@ const Search = () => {
     setOpenSearchPopover(false);
   };
 
-  const popularSearches = [
-    'Devias React Dashboard',
-    'Devias',
-    'Admin Pannel',
-    'Project',
-    'Pages',
-  ];
+  const popularSearches = ['Project', 'Error', 'Hafiz', 'Bugs on MPS'];
 
   return (
     <React.Fragment>

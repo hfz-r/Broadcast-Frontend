@@ -28,12 +28,15 @@ const Overview = props => {
       spacing={3}
     >
       <Grid item lg={8} xl={9} xs={12}>
-        <Description />
-        <Body className={classes.body} body={announcement.body} />
+        <Description description={announcement.projectAbout.description} />
+        <Body
+          className={classes.body}
+          body={announcement.projectDetails.editor}
+        />
       </Grid>
       <Grid item lg={4} xl={3} xs={12}>
         <Holder announcement={announcement} />
-        <Members className={classes.members} members={announcement.members} />
+        {/* <Members className={classes.members} /> */}
       </Grid>
     </Grid>
   );

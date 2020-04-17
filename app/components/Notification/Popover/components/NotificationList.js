@@ -12,7 +12,6 @@ import {
   ListItemText,
 } from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import PaymentIcon from '@material-ui/icons/Payment';
 import PeopleIcon from '@material-ui/icons/PeopleOutlined';
 import CodeIcon from '@material-ui/icons/Code';
 import StoreIcon from '@material-ui/icons/Store';
@@ -48,11 +47,6 @@ const NotificationList = props => {
   const classes = useStyles();
 
   const avatars = {
-    order: (
-      <Avatar className={classes.avatarBlue}>
-        <PaymentIcon />
-      </Avatar>
-    ),
     user: (
       <Avatar className={classes.avatarOrange}>
         <PeopleIcon />

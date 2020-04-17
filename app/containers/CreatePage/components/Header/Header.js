@@ -19,7 +19,7 @@ const Header = props => {
         New Announcement
       </Typography>
       <Typography component="h1" variant="h3">
-        Apply for listing announcement
+        Have something on your mind?
       </Typography>
     </div>
   );

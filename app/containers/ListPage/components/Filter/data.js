@@ -1,18 +1,14 @@
 export const selects = [
   {
-    label: 'Type',
-    options: ['Warning', 'Alert', 'Info'],
+    label: 'Category',
+    options: ['Warning', 'Error', 'Info', 'Others'],
   },
   {
     label: 'Project',
-    options: ['ACMS', 'MPS', 'E-FLOOR', 'SCM'],
+    options: ['ACMS', 'MPS', 'SCM'],
   },
-  {
-    label: 'Location',
-    options: ['NGC', 'HSB'],
-  },
-  {
-    label: 'Roles',
-    options: ['Manager', 'Operation', 'QA'],
-  },
+  // {
+  //   label: 'Roles',
+  //   options: ['Manager', 'Operation', 'QA'],
+  // },
 ];

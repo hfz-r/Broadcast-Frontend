@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 import { Image } from 'components';
 
@@ -15,9 +15,9 @@ const Brand = () => {
   const classes = useStyles();
 
   return (
-    <NavLink to="/">
+    <RouterLink to="/">
       <Image className={classes.root} name="brdcst-logo-transparent-3" />
-    </NavLink>
+    </RouterLink>
   );
 };
 

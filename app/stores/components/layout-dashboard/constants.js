@@ -1,2 +1,1 @@
-export const TOGGLE_LAYOUT_DASHBOARD_MENU =
-  'stores/components/layout-dashboard/TOGGLE_LAYOUT_DASHBOARD_MENU';
+export const TOGGLE_LAYOUT_DASHBOARD_MENU = 'TOGGLE_LAYOUT_DASHBOARD_MENU';

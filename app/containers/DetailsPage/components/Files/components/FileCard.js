@@ -59,12 +59,36 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const b64toBlob = (b64Data, contentType = '', sliceSize = 512) => {
+  const byteCharacters = atob(b64Data);
+  const byteArrays = [];
+  for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+    const slice = byteCharacters.slice(offset, offset + sliceSize);
+    const byteNumbers = new Array(slice.length);
+    for (let i = 0; i < slice.length; i += 1) {
+      byteNumbers[i] = slice.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    byteArrays.push(byteArray);
+  }
+  const blob = new Blob(byteArrays, { type: contentType });
+  return blob;
+};
+
+const decode = (data, type) => {
+  const blob = b64toBlob(data, type);
+  return URL.createObjectURL(blob);
+};
+
 const FileCard = props => {
   const { file, className, ...rest } = props;
 
   const classes = useStyles();
   const moreRef = useRef(null);
+  const downloadRef = useRef(null);
   const [openMenu, setOpenMenu] = useState(false);
+
+  let iconInput = null;
 
   const handleMenuOpen = () => {
     setOpenMenu(true);
@@ -74,13 +98,31 @@ const FileCard = props => {
     setOpenMenu(false);
   };
 
+  const handleDownload = fileName => {
+    const link = document.createElement('a');
+    link.href =
+      iconInput ||
+      downloadRef.current.style.backgroundImage.slice(4, -1).replace(/"/g, '');
+    link.download = fileName;
+    link.click();
+  };
+
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
-      {file.mimeType.includes('image/') ? (
-        <CardMedia className={classes.media} image={file.url} />
+      {file.type.includes('image/') ? (
+        <CardMedia
+          ref={downloadRef}
+          className={classes.media}
+          image={decode(file.data, file.type)}
+        />
       ) : (
         <div className={classes.placeholder}>
-          <InsertDriveFileIcon className={classes.insertDriveFileIcon} />
+          <InsertDriveFileIcon
+            ref={() => {
+              iconInput = decode(file.data, file.type);
+            }}
+            className={classes.insertDriveFileIcon}
+          />
         </div>
       )}
       <CardContent className={classes.content}>
@@ -103,7 +145,7 @@ const FileCard = props => {
       </CardContent>
       <Divider />
       <CardActions className={classes.actions}>
-        <Button>
+        <Button onClick={() => handleDownload(file.name)}>
           <GetAppIcon className={classes.getAppIcon} />
           Download
         </Button>

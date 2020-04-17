@@ -28,7 +28,7 @@ const Header = props => {
   const classes = useStyles();
 
   const data = {
-    name: 'Hafiz',
+    name: 'My Admin',
   };
 
   return (
@@ -37,7 +37,7 @@ const Header = props => {
         Home
       </Typography>
       <Typography component="h1" gutterBottom variant="h3">
-        Good Morning, {data.name}
+        Hi, {data.name}
       </Typography>
       <Typography variant="subtitle1">
         Here&apos;s what&apos;s happening

@@ -3,6 +3,7 @@ import Remote from 'utils/remote';
 import * as T from './constants';
 
 export const initialState = {
+  message: Remote.NotAsked,
   messages: Remote.NotAsked,
   creating: Remote.NotAsked,
 };
@@ -28,6 +29,15 @@ const announcementReducer = (state = initialState, action) =>
         break;
       case T.CREATE_MESSAGE_FAILURE:
         draft.creating = Remote.Failure(action.payload);
+        break;
+      case T.FETCH_MESSAGE_LOADING:
+        draft.message = Remote.Loading;
+        break;
+      case T.FETCH_MESSAGE_SUCCESS:
+        draft.message = Remote.Success(action.payload);
+        break;
+      case T.FETCH_MESSAGE_FAILURE:
+        draft.message = Remote.Failure(action.payload);
         break;
     }
   });

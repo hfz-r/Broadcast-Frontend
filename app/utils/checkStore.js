@@ -1,21 +1,17 @@
-import { conformsTo, isFunction, isObject } from 'lodash';
+import { is, pipe, filter, values } from 'ramda';
 import invariant from 'invariant';
 
 /**
  * Validate the shape of redux store
  */
 export default function checkStore(store) {
-  const shape = {
-    dispatch: isFunction,
-    subscribe: isFunction,
-    getState: isFunction,
-    replaceReducer: isFunction,
-    runSaga: isFunction,
-    injectedReducers: isObject,
-    injectedSagas: isObject,
-  };
+  const result = pipe(
+    values,
+    filter(s => is(Function, s) || is(Object, s)),
+  )(store);
+
   invariant(
-    conformsTo(store, shape),
+    result && result.length > 0,
     '(app/utils...) injectors: Expected a valid redux store',
   );
 }

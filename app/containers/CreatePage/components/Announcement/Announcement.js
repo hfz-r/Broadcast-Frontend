@@ -6,11 +6,10 @@ import { connect } from 'react-redux';
 import { Field, FieldArray, formValueSelector } from 'redux-form';
 import { makeStyles } from '@material-ui/styles';
 import { Card, CardHeader, CardContent, Typography } from '@material-ui/core';
+import { RenderChip, RenderTextField } from 'components/Form';
 import { required } from '../../validators';
 import { RenderTagButton } from './RenderTagButton';
 import { RenderDatePicker } from './RenderDatePicker';
-import { RenderTextField } from './RenderTextField';
-import { RenderChip } from './RenderChip';
 import { RenderSelectMultiple } from './RenderSelectMultiple';
 
 const formName = 'createProject';
@@ -68,12 +67,10 @@ const AboutAnnouncement = props => {
   useEffect(() => {
     formActions.initialize(formName, {
       projectAbout: {
-        // tags: ['MPS', 'Operation'],
+        // category: ['Others'],
+        // tags: ['hartalega'],
         start_date: moment(),
         end_date: moment().add(1, 'day'),
-      },
-      projectSelector: {
-        NGC: true,
       },
     });
   }, []);
@@ -120,6 +117,24 @@ const AboutAnnouncement = props => {
         <div className={classes.formGroup}>
           <div className={classes.fieldGroup}>
             <Field
+              name="start_date"
+              label="Start Date"
+              component={RenderDatePicker}
+              format={null}
+              className={classes.dateField}
+            />
+            <Field
+              name="end_date"
+              label="End Date"
+              component={RenderDatePicker}
+              format={null}
+              className={classes.dateField}
+            />
+          </div>
+        </div>
+        <div className={classes.formGroup}>
+          <div className={classes.fieldGroup}>
+            <Field
               name="tag"
               label="Tags"
               component={RenderTextField}
@@ -134,29 +149,11 @@ const AboutAnnouncement = props => {
             />
           </div>
           <Typography className={classes.fieldHint} variant="body2">
-            Tags will be colored depending the technology if the system
-            recognises.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+            efficitur nisi elementum odio ultricies, at gravida ex finibus.
           </Typography>
           <div className={classes.tags}>
             <FieldArray name="tags" component={RenderTags} />
-          </div>
-        </div>
-        <div className={classes.formGroup}>
-          <div className={classes.fieldGroup}>
-            <Field
-              name="start_date"
-              label="Start Date"
-              component={RenderDatePicker}
-              format={null}
-              className={classes.dateField}
-            />
-            <Field
-              name="end_date"
-              label="End Date"
-              component={RenderDatePicker}
-              format={null}
-              className={classes.dateField}
-            />
           </div>
         </div>
       </CardContent>

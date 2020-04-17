@@ -16,6 +16,7 @@ import {
   colors,
 } from '@material-ui/core';
 import getInitials from 'utils/getInitials';
+import { members } from './data';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -34,7 +35,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Members = props => {
-  const { members, className, ...rest } = props;
+  const { className, ...rest } = props;
 
   const classes = useStyles();
 
@@ -42,7 +43,7 @@ const Members = props => {
     <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
         className={classes.header}
-        title="Related members"
+        title="Maintainers"
         titleTypographyProps={{
           variant: 'overline',
         }}
@@ -78,7 +79,6 @@ const Members = props => {
 
 Members.propTypes = {
   className: PropTypes.string,
-  members: PropTypes.array.isRequired,
 };
 
 export default Members;

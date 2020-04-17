@@ -1,5 +1,5 @@
 import invariant from 'invariant';
-import { isEmpty, isFunction, isString } from 'lodash';
+import { is, isEmpty } from 'ramda';
 
 import checkStore from './checkStore';
 import createReducer from '../reducers';
@@ -9,7 +9,7 @@ export function injectReducerFactory(store, isValid) {
     if (!isValid) checkStore(store);
 
     invariant(
-      isString(key) && !isEmpty(key) && isFunction(reducer),
+      is(String, key) && !isEmpty(key) && is(Function, reducer),
       '(app/utils...) injectReducer: Expected `reducer` to be a reducer function',
     );
 
