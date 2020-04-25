@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { reduxForm } from 'redux-form';
 import { Button, Typography } from '@material-ui/core';
-import HelpIcon from '@material-ui/icons/HelpOutlineOutlined';
+import TimerIcon from '@material-ui/icons/Timer';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'components';
 
 const AutoDisconnection = props => {
@@ -13,7 +13,7 @@ const AutoDisconnection = props => {
   return (
     <Modal size="large" position={position} total={total}>
       <form onSubmit={handleSubmit}>
-        <ModalHeader onClose={handleCancel} icon={HelpIcon}>
+        <ModalHeader onClose={handleCancel} icon={TimerIcon}>
           <FormattedMessage
             id="modals.autodisconnection.title"
             defaultMessage="Are you still there?"

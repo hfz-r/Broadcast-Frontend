@@ -13,7 +13,7 @@ import {
 import { ToggleButtonGroup, ToggleButton } from '@material-ui/lab';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import { AnnouncementCard, Paginate } from 'components';
+import { Carded, Paginate } from 'components';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -115,7 +115,7 @@ const Announcements = props => {
             sm={mode === 'grid' ? 6 : 12}
             xs={12}
           >
-            <AnnouncementCard key={message.message_id} announcement={message} />
+            <Carded key={message.message_id} announcement={message} />
           </Grid>
         ))}
       </Grid>

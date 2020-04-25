@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const NavbarContent = ({ location, userSession }) => {
+const NavbarContent = ({ location, user }) => {
   const classes = useStyles();
 
   return (
@@ -41,9 +41,9 @@ const NavbarContent = ({ location, userSession }) => {
           <Image className={classes.logo} name="brdcst-logo-transparent-3" />
         </RouterLink>
         <Typography className={classes.name} variant="h4">
-          {userSession.first_name} {userSession.last_name}
+          {user.given_name}
         </Typography>
-        <Typography variant="body2">{userSession.bio}</Typography>
+        <Typography variant="body2">{user.designation}</Typography>
       </div>
       <Divider className={classes.divider} />
       <nav className={classes.navigation}>
@@ -63,7 +63,7 @@ const NavbarContent = ({ location, userSession }) => {
 
 NavbarContent.propTypes = {
   location: PropTypes.object,
-  userSession: PropTypes.object,
+  user: PropTypes.object,
 };
 
 export default NavbarContent;

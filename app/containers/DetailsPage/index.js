@@ -14,13 +14,18 @@ import AnnouncementDetails from './template.success';
 class AnnouncementDetailsContainer extends React.PureComponent {
   static propTypes = {
     data: PropTypes.object,
+    apiToken: PropTypes.object,
     computedMatch: PropTypes.object.isRequired,
     announcementActions: PropTypes.object,
   };
 
   componentDidMount() {
+    const { apiToken, computedMatch } = this.props;
+    const sessionToken = apiToken.getOrElse('');
+
     this.props.announcementActions.fetchMessage(
-      this.props.computedMatch.params.slug,
+      computedMatch.params.slug,
+      sessionToken,
     );
   }
 
@@ -41,6 +46,7 @@ class AnnouncementDetailsContainer extends React.PureComponent {
 const mapStateToProps = createStructuredSelector({
   data: selectors.announcement.makeSelectMessage(),
   dataCount: selectors.announcement.makeSelectCountMessages(),
+  apiToken: selectors.profile.makeSelectApiToken(),
 });
 
 const mapDispatchToProps = dispatch => ({

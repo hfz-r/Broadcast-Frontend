@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
+import autoDisconnection from './utils/services/LogoutService/autoDisconnection';
 import serializer from './utils/Serializer';
 import createReducer from './reducers';
 
@@ -35,7 +36,12 @@ export default function configureStore(initialState = {}, history) {
   // Create the store with two middlewares
   // 1. sagaMiddleware: Makes redux-sagas work
   // 2. routerMiddleware: Syncs the location/URL path to the state
-  const middlewares = [sagaMiddleware, routerMiddleware(history)];
+  // 3. autoDisconnection: Invoke timer to facilitate
+  const middlewares = [
+    sagaMiddleware,
+    routerMiddleware(history),
+    autoDisconnection(),
+  ];
 
   const enhancers = [applyMiddleware(...middlewares)];
 

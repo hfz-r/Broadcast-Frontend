@@ -53,6 +53,11 @@ const mapDispatchToProps = dispatch => ({
   layout: bindActionCreators(actions.layoutDashboard, dispatch),
 });
 
+const withProfileReducer = injectReducer({
+  key: 'profile',
+  reducer: reducers.profileReducer,
+});
+
 const withLayoutReducer = injectReducer({
   key: 'layoutDashboard',
   reducer: reducers.layoutDashboardReducer,
@@ -69,6 +74,7 @@ const withConnect = connect(
 );
 
 export default compose(
+  withProfileReducer,
   withLayoutReducer,
   withModalsReducer,
   withConnect,

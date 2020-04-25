@@ -4,9 +4,8 @@ import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { createStructuredSelector } from 'reselect';
+import { actions, rootSaga, selectors } from 'stores';
 import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
-import { actions, rootSaga, reducers, selectors } from 'stores';
 import createApi from 'api';
 import Login from './template';
 
@@ -60,15 +59,21 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const api = createApi({ apiKey: '1770d5d9-bcea-4d28-ad21-6cbd5be018a8' });
-const withSaga = injectSaga({
+const withAuthSaga = injectSaga({
   key: 'auth',
   saga: rootSaga.authSaga,
   args: { api },
 });
 
-const withReducer = injectReducer({
+const withProfileSaga = injectSaga({
   key: 'profile',
-  reducer: reducers.profileReducer,
+  saga: rootSaga.profileSaga,
+  args: { api },
+});
+
+const withRouterSaga = injectSaga({
+  key: 'router',
+  saga: rootSaga.routerSaga,
 });
 
 const withConnect = connect(
@@ -77,7 +82,8 @@ const withConnect = connect(
 );
 
 export default compose(
-  withSaga,
-  withReducer,
+  withAuthSaga,
+  withProfileSaga,
+  withRouterSaga,
   withConnect,
 )(LoginContainer);

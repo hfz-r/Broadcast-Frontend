@@ -36,6 +36,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const decode = (data, type) => {
+  const src = `data:${type};base64,${data}`;
+  return src;
+};
+
 const Holder = props => {
   const { announcement, className, ...rest } = props;
 
@@ -49,14 +54,10 @@ const Holder = props => {
             alt="Author"
             className={classes.avatar}
             component={RouterLink}
-            src={announcement.author.image}
+            src={decode(announcement.author.image, 'image/jpeg')}
             to="/profile/1/timeline"
           >
-            {getInitials(
-              `${announcement.author.first_name} ${
-                announcement.author.last_name
-              }`,
-            )}
+            {getInitials(announcement.author.given_name)}
           </Avatar>
         }
         className={classes.header}
@@ -67,14 +68,12 @@ const Holder = props => {
             to="/profile/1/timeline"
             variant="h5"
           >
-            {`${announcement.author.first_name} ${
-              announcement.author.last_name
-            }`}
+            {announcement.author.given_name}
           </Typography>
         }
         title={
           <Typography display="block" variant="overline">
-            Announcement holder
+            Author
           </Typography>
         }
       />

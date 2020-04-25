@@ -1,5 +1,6 @@
 import React from 'react';
 import { colors } from '@material-ui/core';
+import BarChartIcon from '@material-ui/icons/BarChart';
 import AddAlertOutlinedIcon from '@material-ui/icons/AddAlertOutlined';
 import DashboardIcon from '@material-ui/icons/DashboardOutlined';
 import SettingsIcon from '@material-ui/icons/SettingsOutlined';
@@ -15,6 +16,21 @@ export default [
         title: 'Dashboard',
         href: '/home',
         icon: DashboardIcon,
+      },
+      {
+        title: 'Management',
+        href: '/management',
+        icon: BarChartIcon,
+        children: [
+          {
+            title: 'Users',
+            href: '/management/users',
+          },
+          {
+            title: 'Permission',
+            href: '/management/permission',
+          },
+        ],
       },
       {
         title: 'Announcement',

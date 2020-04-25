@@ -1,12 +1,8 @@
-import { call, cancel, delay, fork, put, spawn } from 'redux-saga/effects';
-import moment from 'moment';
+import { call, put, select } from 'redux-saga/effects';
 import * as C from 'utils/services/AlertService';
 import * as A from './actions';
 import * as actions from '../actions';
-
-export const authRetryDelay = 5000;
-
-let renewSessionTask = null;
+import * as selectors from '../selectors';
 
 export default ({ api }) => {
   const login = function* _(action) {
@@ -15,10 +11,10 @@ export default ({ api }) => {
       yield put(A.loginLoading());
       const guid = yield call(api.login, username, password);
       yield put(A.loginSuccess(guid));
-      yield put(actions.profile.setApiTokenLoading());
-      renewSessionTask = yield fork(renewSession, guid, 0);
       yield put(A.authenticate());
       yield put(actions.router.push('/home'));
+      yield put(actions.profile.signIn());
+      yield put(A.startLogoutTimer());
       yield put(actions.form.destroy('login'));
     } catch (e) {
       yield put(A.loginFailure(e.errors));
@@ -26,51 +22,35 @@ export default ({ api }) => {
     }
   };
 
-  const renewSession = function* _(guid, renewIn = 0) {
+  const logout = function* _() {
+    yield put(actions.profile.clearSession());
+    yield logoutClearReduxStore();
+  };
+
+  const deauthorizeBrowser = function* _() {
     try {
-      yield delay(renewIn);
-      yield call(setSession, guid);
+      const sessionToken = (yield select(
+        selectors.profile.makeSelectApiToken(),
+      )).getOrElse('');
+      yield call(api.deauthorizeBrowser, sessionToken);
+      yield put(actions.alerts.displaySuccess(C.DEAUTHORIZE_BROWSER_SUCCESS));
     } catch (e) {
-      yield put(actions.profile.setApiTokenFailure(e));
-      yield spawn(renewSession, guid, authRetryDelay);
+      yield put(actions.alerts.displayError(C.DEAUTHORIZE_BROWSER_ERROR));
+    } finally {
+      yield logoutClearReduxStore();
     }
   };
 
-  const setSession = function* _(guid) {
-    try {
-      const { token: apiToken, expiresAt } = yield call(
-        api.generateSession,
-        guid,
-      );
-      yield put(actions.profile.setApiTokenSuccess(apiToken));
-      yield call(fetchUser, apiToken);
-      const expiresIn = moment(expiresAt)
-        .subtract(5, 's')
-        .diff(moment());
-      yield spawn(renewSession, guid, expiresIn);
-    } catch (e) {
-      throw e;
-    }
+  const logoutClearReduxStore = function* _() {
+    // router will fallback to /login route
+    yield window.history.pushState('', '', '/');
+    yield window.location.reload(true);
   };
 
-  const fetchUser = function* _(sessionToken) {
-    try {
-      const { user } = yield call(api.currentUser, sessionToken);
-      yield put(actions.profile.fetchUserDataSuccess(user));
-      return user;
-    } catch (e) {
-      yield put(actions.profile.fetchUserDataFailure(e));
-      throw e;
-    }
+  return {
+    login,
+    logout,
+    deauthorizeBrowser,
+    logoutClearReduxStore,
   };
-
-  const clearSession = function* _() {
-    if (renewSessionTask) {
-      yield cancel(renewSessionTask);
-      renewSessionTask = null;
-    }
-    yield put(actions.profile.setApiTokenNotAsked());
-  };
-
-  return { login, renewSession, setSession, fetchUser, clearSession };
 };

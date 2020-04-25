@@ -16,19 +16,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const handleLogout = router => {
-  router.push('/login');
-};
-
 const LogoutButton = props => {
-  const { router } = props;
   const classes = useStyles();
-
   return (
     <Button
       className={classes.logoutButton}
       color="inherit"
-      onClick={() => handleLogout(router)}
+      onClick={() => props.routerActions.push('/logout')}
     >
       <InputIcon className={classes.logoutIcon} />
       Sign out
@@ -37,11 +31,11 @@ const LogoutButton = props => {
 };
 
 LogoutButton.propTypes = {
-  router: PropTypes.object,
+  routerActions: PropTypes.object,
 };
 
 const mapDispatchToProps = dispatch => ({
-  router: bindActionCreators(actions.router, dispatch),
+  routerActions: bindActionCreators(actions.router, dispatch),
 });
 
 export default connect(

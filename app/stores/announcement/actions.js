@@ -1,6 +1,9 @@
 import * as T from './constants';
 
-export const fetchMessages = () => ({ type: T.FETCH_MESSAGES });
+export const fetchMessages = sessionToken => ({
+  type: T.FETCH_MESSAGES,
+  payload: sessionToken,
+});
 
 export const fetchMessagesLoading = () => ({ type: T.FETCH_MESSAGES_LOADING });
 
@@ -14,9 +17,9 @@ export const fetchMessagesFailure = error => ({
   payload: error,
 });
 
-export const createMessage = message => ({
+export const createMessage = (message, sessionToken) => ({
   type: T.CREATE_MESSAGE,
-  payload: { message },
+  payload: { message, sessionToken },
 });
 
 export const createMessageLoading = () => ({ type: T.CREATE_MESSAGE_LOADING });
@@ -31,9 +34,9 @@ export const createMessagesFailure = error => ({
   payload: { error },
 });
 
-export const fetchMessage = slug => ({
+export const fetchMessage = (slug, sessionToken) => ({
   type: T.FETCH_MESSAGE,
-  payload: { slug },
+  payload: { slug, sessionToken },
 });
 
 export const fetchMessageLoading = () => ({ type: T.FETCH_MESSAGE_LOADING });

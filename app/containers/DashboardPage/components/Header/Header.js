@@ -23,13 +23,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Header = props => {
-  const { className, ...rest } = props;
-
+  const { className, user, ...rest } = props;
   const classes = useStyles();
-
-  const data = {
-    name: 'My Admin',
-  };
 
   return (
     <div {...rest} className={clsx(classes.root, className)}>
@@ -37,7 +32,7 @@ const Header = props => {
         Home
       </Typography>
       <Typography component="h1" gutterBottom variant="h3">
-        Hi, {data.name}
+        Hi, {user.given_name}
       </Typography>
       <Typography variant="subtitle1">
         Here&apos;s what&apos;s happening
@@ -48,6 +43,7 @@ const Header = props => {
 
 Header.propTypes = {
   className: PropTypes.string,
+  user: PropTypes.object,
 };
 
 Header.defaultProps = {};

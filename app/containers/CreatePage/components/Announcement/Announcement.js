@@ -6,11 +6,15 @@ import { connect } from 'react-redux';
 import { Field, FieldArray, formValueSelector } from 'redux-form';
 import { makeStyles } from '@material-ui/styles';
 import { Card, CardHeader, CardContent, Typography } from '@material-ui/core';
-import { RenderChip, RenderTextField } from 'components/Form';
+import {
+  RenderChip,
+  RenderSelectMultiple,
+  RenderTextField,
+} from 'components/Form';
+import { categories } from 'templates/config';
 import { required } from '../../validators';
 import { RenderTagButton } from './RenderTagButton';
 import { RenderDatePicker } from './RenderDatePicker';
-import { RenderSelectMultiple } from './RenderSelectMultiple';
 
 const formName = 'createProject';
 const formSection = 'projectAbout';
@@ -78,6 +82,7 @@ const AboutAnnouncement = props => {
   const handleKeyDown = e => {
     if (e.key === 'Enter') {
       formActions.arrayPush(formName, `${formSection}.tags`, e.target.value);
+      formActions.change(formName, `${formSection}.tag`, '');
     }
   };
 
@@ -111,6 +116,7 @@ const AboutAnnouncement = props => {
           <Field
             name="category"
             label="Category"
+            payload={categories}
             component={RenderSelectMultiple}
           />
         </div>

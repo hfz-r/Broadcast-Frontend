@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
+import { connect } from 'react-redux';
 import { Page } from 'components';
 import {
   Header,
@@ -22,12 +24,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Dashboard = () => {
+const Dashboard = props => {
   const classes = useStyles();
 
   return (
     <Page className={classes.root} title="Dashboard">
-      <Header />
+      <Header user={props.userData} />
       <Grid className={classes.container} container spacing={3}>
         <Grid item lg={3} sm={6} xs={12}>
           <TodayHighlights />
@@ -52,4 +54,15 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+Dashboard.propTypes = {
+  userData: PropTypes.object,
+};
+
+const mapStateToProps = state => ({
+  userData: state.profile.userData.getOrElse({}),
+});
+
+export default connect(
+  mapStateToProps,
+  null,
+)(Dashboard);

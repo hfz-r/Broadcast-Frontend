@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import moment from 'moment';
+import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 import {
   Avatar,
@@ -21,9 +20,10 @@ import {
 import ShareIcon from '@material-ui/icons/Share';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import moment from 'moment';
 import getInitials from 'utils/getInitials';
-import Label from 'components/Label';
-import { categories } from './data';
+import { categories } from 'templates/config';
+import CategoriesLabel from './CategoriesLabel';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -59,6 +59,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const decode = (data, type) => {
+  const src = `data:${type};base64,${data}`;
+  return src;
+};
+
 const AnnouncementCard = props => {
   const { announcement, className, ...rest } = props;
 
@@ -80,12 +85,11 @@ const AnnouncementCard = props => {
     <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
         avatar={
-          <Avatar alt="Author" src={announcement.author.image}>
-            {getInitials(
-              `${announcement.author.first_name} ${
-                announcement.author.last_name
-              }`,
-            )}
+          <Avatar
+            alt="Author"
+            src={decode(announcement.author.image, 'image/jpeg')}
+          >
+            {getInitials(announcement.author.given_name)}
           </Avatar>
         }
         className={classes.header}
@@ -99,9 +103,7 @@ const AnnouncementCard = props => {
               to="/profile/1/timeline"
               variant="h6"
             >
-              {`${announcement.author.first_name} ${
-                announcement.author.last_name
-              }`}
+              {announcement.author.given_name}
             </Link>{' '}
             | Updated: {moment(announcement.updated_at).fromNow()}
           </Typography>
@@ -124,18 +126,10 @@ const AnnouncementCard = props => {
           </Typography>
         </div>
         <div className={classes.tags}>
-          {announcement.projectAbout.category.map(value =>
-            Object.values(categories).map(cat => {
-              if (cat.text === value) {
-                return (
-                  <Label key={cat.text} color={cat.color}>
-                    {cat.text}
-                  </Label>
-                );
-              }
-              return null;
-            }),
-          )}
+          <CategoriesLabel
+            selected={announcement.projectAbout.category}
+            payload={categories}
+          />
         </div>
         <Divider />
         <div className={classes.details}>

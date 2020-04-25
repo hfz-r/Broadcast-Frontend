@@ -6,10 +6,13 @@ import { connect } from 'react-redux';
 import DashboardLayout from 'layouts/Dashboard';
 import PublicLayout from 'layouts/Public';
 import Login from 'containers/Login';
+import Logout from 'containers/Logout';
 import Dashboard from 'containers/DashboardPage';
 import AnnouncementList from 'containers/ListPage';
 import AnnouncementCreate from 'containers/CreatePage';
 import AnnouncementDetails from 'containers/DetailsPage';
+import UserMgmt from 'containers/UserMgmt';
+import UserMgmtDetails from 'containers/DetailsUser';
 
 const App = props => {
   const { isAuthenticated } = props;
@@ -17,6 +20,7 @@ const App = props => {
   return (
     <Switch>
       <PublicLayout path="/login" component={Login} />
+      <PublicLayout exclude path="/logout" component={Logout} />
       <DashboardLayout path="/home" component={Dashboard} />
       <DashboardLayout
         path="/announcements/browse"
@@ -34,6 +38,17 @@ const App = props => {
       <DashboardLayout
         path="/announcements/:slug/:tab"
         component={AnnouncementDetails}
+        exact
+      />
+      <DashboardLayout path="/management/users" component={UserMgmt} />
+      <DashboardLayout
+        path="/management/:username"
+        component={UserMgmtDetails}
+        exact
+      />
+      <DashboardLayout
+        path="/management/:username/:tab"
+        component={UserMgmtDetails}
         exact
       />
       {isAuthenticated ? (

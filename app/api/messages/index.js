@@ -1,23 +1,27 @@
 export default ({ apiUrl, get, post }) => {
-  const fetchMessages = () =>
+  const fetchMessages = sessionToken =>
     get({
       url: apiUrl,
       endPoint: '/messages',
+      contentType: 'application/json',
+      sessionToken,
     });
 
-  const createMessage = payload =>
+  const createMessage = (payload, sessionToken) =>
     post({
       url: apiUrl,
       endPoint: '/messages',
       contentType: 'application/json',
-      data: payload,
+      data: { message: payload },
+      sessionToken,
     });
 
-  const fetchMessage = ({ slug }) =>
+  const fetchMessage = ({ slug, sessionToken }) =>
     get({
       url: apiUrl,
       endPoint: `/messages/${slug}`,
       contentType: 'application/json',
+      sessionToken,
     });
 
   return { fetchMessages, createMessage, fetchMessage };

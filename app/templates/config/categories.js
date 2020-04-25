@@ -1,6 +1,6 @@
 import { colors } from '@material-ui/core';
 
-export const categories = [
+export default [
   {
     text: 'Warning',
     color: colors.orange[900],

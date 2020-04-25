@@ -1,32 +1,23 @@
-import { call, put, select } from 'redux-saga/effects';
-import { assoc } from 'ramda';
+import { call, put } from 'redux-saga/effects';
 import * as C from 'utils/services/AlertService';
 import * as A from './actions';
 import * as actions from '../actions';
-import * as selectors from '../selectors';
 
 export default ({ api }) => {
-  const fetchMessages = function* _() {
+  const fetchMessages = function* _(action) {
     try {
       yield put(A.fetchMessagesLoading());
-      const messages = yield call(api.fetchMessages);
+      const messages = yield call(api.fetchMessages, action.payload);
       yield put(A.fetchMessagesSuccess(messages));
     } catch (e) {
       yield put(A.fetchMessagesFailure(e));
     }
   };
 
-  const submitMessage = function* _(action) {
+  const submitMessage = function* _({ payload }) {
     try {
       yield put(A.createMessageLoading());
-      // get current session
-      const session = yield select(selectors.auth.makeSelectSession());
-      const payload = {
-        message: assoc('author', session, action.payload.message),
-      };
-      // execute api
-      yield call(api.createMessage, payload);
-      // push result
+      yield call(api.createMessage, payload.message, payload.sessionToken);
       yield put(A.createMessageSuccess());
       yield put(actions.alerts.displaySuccess(C.CREATE_ANNOUNCEMENT_SUCCESS));
       yield put(actions.form.reset('createProject'));

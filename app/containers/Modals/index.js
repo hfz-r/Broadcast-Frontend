@@ -4,7 +4,7 @@ import AutoDisconnection from './AutoDisconnection';
 
 const Modals = () => (
   <div>
-    <AutoDisconnection />
+    <AutoDisconnection disableOutsideClose />
   </div>
 );
 

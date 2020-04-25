@@ -26,3 +26,5 @@ export const logout = () => ({ type: T.LOGOUT });
 export const logoutClearReduxStore = () => ({
   type: T.LOGOUT_CLEAR_REDUX_STORE,
 });
+
+export const startLogoutTimer = () => ({ type: T.START_LOGOUT_TIMER });

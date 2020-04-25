@@ -4,7 +4,8 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Typography, Grid, Button, colors } from '@material-ui/core';
 import { Share } from '@material-ui/icons';
-import { Label } from 'components';
+import { Labeled } from 'components';
+import { categories } from 'templates/config';
 import { Breadcrumb } from './components';
 
 const useStyles = makeStyles(theme => ({
@@ -31,25 +32,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const categories = [
-  {
-    text: 'Warning',
-    color: colors.orange[900],
-  },
-  {
-    text: 'Error',
-    color: colors.red[600],
-  },
-  {
-    text: 'Info',
-    color: colors.lightBlue[600],
-  },
-  {
-    text: 'Others',
-    color: colors.grey[600],
-  },
-];
-
 const Header = props => {
   const { announcement, announcementCount, className, ...rest } = props;
 
@@ -67,18 +49,10 @@ const Header = props => {
             {announcement.projectAbout.title}
           </Typography>
           <div className={classes.label}>
-            {announcement.projectAbout.category.map(value =>
-              Object.values(categories).map(cat => {
-                if (cat.text === value) {
-                  return (
-                    <Label key={cat.text} color={cat.color}>
-                      {cat.text}
-                    </Label>
-                  );
-                }
-                return null;
-              }),
-            )}
+            <Labeled
+              selected={announcement.projectAbout.category}
+              payload={categories}
+            />
           </div>
         </Grid>
         <Grid item>

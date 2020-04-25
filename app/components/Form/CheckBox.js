@@ -5,13 +5,7 @@ import { FormControlLabel, Checkbox } from '@material-ui/core';
 export const RenderCheckbox = ({ input, label, ...custom }) => (
   <React.Fragment>
     <FormControlLabel
-      control={
-        <Checkbox
-          {...custom}
-          checked={!!input.value}
-          onChange={input.onChange}
-        />
-      }
+      control={<Checkbox checked={!!input.value} {...input} {...custom} />}
       label={label}
     />
   </React.Fragment>

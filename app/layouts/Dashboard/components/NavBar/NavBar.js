@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { connect } from 'react-redux';
-import { actions } from 'stores';
 import { makeStyles } from '@material-ui/styles';
 import { Drawer, Hidden } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { actions } from 'stores';
 import { NavbarContent } from './components';
 
 const useStyles = makeStyles(theme => ({
@@ -25,7 +25,7 @@ const NavBar = props => {
     toggleMenu,
     onToggleDashboardMenu,
     location,
-    userSession,
+    userData,
     className,
     ...rest
   } = props;
@@ -47,22 +47,14 @@ const NavBar = props => {
           variant="temporary"
         >
           <div className={clsx(classes.root, className)}>
-            <NavbarContent
-              {...rest}
-              location={location}
-              userSession={userSession}
-            />
+            <NavbarContent {...rest} location={location} user={userData} />
           </div>
         </Drawer>
       </Hidden>
       <Hidden mdDown>
         <Drawer open variant="permanent">
           <div className={clsx(classes.root, className)}>
-            <NavbarContent
-              {...rest}
-              location={location}
-              userSession={userSession}
-            />
+            <NavbarContent {...rest} location={location} user={userData} />
           </div>
         </Drawer>
       </Hidden>
@@ -74,14 +66,14 @@ NavBar.propTypes = {
   className: PropTypes.string,
   toggleMenu: PropTypes.bool,
   location: PropTypes.object,
-  userSession: PropTypes.object,
+  userData: PropTypes.object,
   onToggleDashboardMenu: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
   toggleMenu: state.layoutDashboard.toggle,
   location: state.router.location,
-  userSession: state.auth.userSession,
+  userData: state.profile.userData.getOrElse({}),
 });
 
 const mapDispatchToProps = dispatch => ({

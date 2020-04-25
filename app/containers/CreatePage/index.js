@@ -12,6 +12,7 @@ import AnnouncementCreate from './template';
 class AnnouncementCreateContainer extends React.PureComponent {
   static propTypes = {
     data: PropTypes.object,
+    apiToken: PropTypes.object,
     formActions: PropTypes.object,
     announcementActions: PropTypes.object,
   };
@@ -20,8 +21,11 @@ class AnnouncementCreateContainer extends React.PureComponent {
     this.props.formActions.reset('createProject');
   }
 
-  onSubmit = values => {
-    this.props.announcementActions.createMessage(values);
+  handleSubmit = values => {
+    const { apiToken } = this.props;
+    const sessionToken = apiToken.getOrElse('');
+
+    this.props.announcementActions.createMessage(values, sessionToken);
   };
 
   render() {
@@ -37,7 +41,7 @@ class AnnouncementCreateContainer extends React.PureComponent {
     const childProps = {
       busy,
       apiError: error,
-      onSubmit: this.onSubmit,
+      onSubmit: this.handleSubmit,
     };
 
     return <AnnouncementCreate {...this.props} {...childProps} />;
@@ -46,6 +50,7 @@ class AnnouncementCreateContainer extends React.PureComponent {
 
 const mapStateToProps = createStructuredSelector({
   data: selectors.announcement.makeSelectCreating(),
+  apiToken: selectors.profile.makeSelectApiToken(),
 });
 
 const mapDispatchToProps = dispatch => ({

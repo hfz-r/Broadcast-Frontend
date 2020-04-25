@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   InputLabel,
@@ -9,10 +8,8 @@ import {
   ListItemText,
   Select,
   Checkbox,
-  Chip,
-  colors,
 } from '@material-ui/core';
-import { Error, Warning, Info, Help } from '@material-ui/icons';
+import { Labeled } from 'components/Announcement';
 
 const useStyles = makeStyles({
   labels: {
@@ -25,18 +22,6 @@ const useStyles = makeStyles({
   alert: {
     color: '#e53935',
   },
-  others: {
-    backgroundColor: colors.grey[600],
-  },
-  info: {
-    backgroundColor: colors.lightBlue[600],
-  },
-  warning: {
-    backgroundColor: colors.orange[900],
-  },
-  error: {
-    backgroundColor: colors.red[600],
-  },
 });
 
 const MenuProps = {
@@ -48,26 +33,7 @@ const MenuProps = {
   },
 };
 
-const categories = [
-  {
-    text: 'Warning',
-    icon: <Warning />,
-  },
-  {
-    text: 'Error',
-    icon: <Error />,
-  },
-  {
-    text: 'Info',
-    icon: <Info />,
-  },
-  {
-    text: 'Others',
-    icon: <Help />,
-  },
-];
-
-export const RenderSelectMultiple = ({ label, input }) => {
+export const RenderSelectMultiple = ({ label, input, payload }) => {
   const classes = useStyles();
 
   return (
@@ -85,31 +51,16 @@ export const RenderSelectMultiple = ({ label, input }) => {
         onChange={input.onChange}
         renderValue={selected => (
           <div className={classes.labels}>
-            {selected.map(value =>
-              Object.values(categories).map(cat => {
-                if (cat.text === value) {
-                  return (
-                    <Chip
-                      key={value}
-                      size="small"
-                      className={clsx(
-                        classes.label,
-                        classes[cat.text.toLowerCase()],
-                      )}
-                      icon={cat.icon}
-                      label={cat.text}
-                      color="secondary"
-                    />
-                  );
-                }
-                return null;
-              }),
-            )}
+            <Labeled
+              className={classes.label}
+              selected={selected}
+              payload={payload}
+            />
           </div>
         )}
         MenuProps={MenuProps}
       >
-        {categories.map(cat => (
+        {payload.map(cat => (
           <MenuItem key={cat.text} value={cat.text}>
             <Checkbox checked={input.value.indexOf(cat.text) > -1} />
             <ListItemText primary={cat.text} />
@@ -123,4 +74,5 @@ export const RenderSelectMultiple = ({ label, input }) => {
 RenderSelectMultiple.propTypes = {
   label: PropTypes.string,
   input: PropTypes.object,
+  payload: PropTypes.array,
 };

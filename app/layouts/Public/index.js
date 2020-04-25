@@ -45,11 +45,12 @@ const styles = theme => ({
 class PublicLayoutContainer extends React.PureComponent {
   static propTypes = {
     classes: PropTypes.object,
+    exclude: PropTypes.bool,
     component: PropTypes.elementType,
   };
 
   render() {
-    const { classes, component: Component, ...rest } = this.props;
+    const { classes, exclude, component: Component, ...rest } = this.props;
 
     return (
       <Route
@@ -65,7 +66,7 @@ class PublicLayoutContainer extends React.PureComponent {
                 <div />
                 <div>
                   <Component {...matchProps} />
-                  <ExternalLink />
+                  {exclude ? null : <ExternalLink />}
                 </div>
                 {/* <Footer /> */}
               </div>

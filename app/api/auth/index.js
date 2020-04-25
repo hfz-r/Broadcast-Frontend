@@ -14,5 +14,13 @@ export default ({ apiUrl, get, post }) => {
       data: { username, password },
     });
 
-  return { generateSession, login };
+  const deauthorizeBrowser = sessionToken =>
+    get({
+      url: apiUrl,
+      endPoint: '/auth/logout',
+      contentType: 'application/json',
+      sessionToken,
+    });
+
+  return { generateSession, login, deauthorizeBrowser };
 };
