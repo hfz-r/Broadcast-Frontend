@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import DashboardLayout from 'layouts/Dashboard';
 import PublicLayout from 'layouts/Public';
+import WidgetLayout from 'layouts/Widget';
 import Login from 'containers/Login';
 import Logout from 'containers/Logout';
 import Dashboard from 'containers/DashboardPage';
@@ -13,6 +14,7 @@ import AnnouncementCreate from 'containers/CreatePage';
 import AnnouncementDetails from 'containers/DetailsPage';
 import UserMgmt from 'containers/UserMgmt';
 import UserMgmtDetails from 'containers/DetailsUser';
+import RoleMgmt from 'containers/RoleMgmt';
 
 const App = props => {
   const { isAuthenticated } = props;
@@ -21,6 +23,11 @@ const App = props => {
     <Switch>
       <PublicLayout path="/login" component={Login} />
       <PublicLayout exclude path="/logout" component={Logout} />
+      <WidgetLayout
+        path="/views/:token/:slug/:tab"
+        component={AnnouncementDetails}
+        exact
+      />
       <DashboardLayout path="/home" component={Dashboard} />
       <DashboardLayout
         path="/announcements/browse"
@@ -40,6 +47,7 @@ const App = props => {
         component={AnnouncementDetails}
         exact
       />
+      <DashboardLayout path="/management/roles" component={RoleMgmt} />
       <DashboardLayout path="/management/users" component={UserMgmt} />
       <DashboardLayout
         path="/management/:username"

@@ -79,6 +79,19 @@ export default ({ api }) => {
     }
   };
 
+  const fetchRoles = function* _() {
+    try {
+      yield put(A.fetchRolesLoading());
+      const sessionToken = (yield select(
+        selectors.profile.makeSelectApiToken(),
+      )).getOrElse('');
+      const roles = yield call(api.fetchRoles, sessionToken);
+      yield put(A.fetchRolesSuccess(roles));
+    } catch (e) {
+      yield put(A.fetchRolesFailure(e.errors));
+    }
+  };
+
   const getUserInfo = function* _(action) {
     const { username } = action.payload;
     try {
@@ -138,6 +151,7 @@ export default ({ api }) => {
     clearSession,
     fetchUser,
     fetchUsers,
+    fetchRoles,
     getUserInfo,
     editUserInfo,
     renewSession,

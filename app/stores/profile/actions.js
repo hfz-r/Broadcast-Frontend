@@ -82,3 +82,14 @@ export const signIn = () => ({
 export const clearSession = () => ({
   type: T.CLEAR_SESSION,
 });
+
+export const fetchRoles = () => ({ type: T.FETCH_ROLES });
+export const fetchRolesLoading = () => ({ type: T.FETCH_ROLES_LOADING });
+export const fetchRolesSuccess = roles => ({
+  type: T.FETCH_ROLES_SUCCESS,
+  payload: { roles },
+});
+export const fetchRolesFailure = error => ({
+  type: T.FETCH_ROLES_FAILURE,
+  payload: { error },
+});

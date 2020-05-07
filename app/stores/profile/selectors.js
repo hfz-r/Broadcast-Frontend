@@ -16,6 +16,12 @@ const makeSelectUsers = () =>
     profileState => profileState.users,
   );
 
+const makeSelectRoles = () =>
+  createSelector(
+    selectProfile,
+    profileState => profileState.roles,
+  );
+
 const makeSelectUserCount = () =>
   createSelector(
     selectProfile,
@@ -34,6 +40,7 @@ export {
   selectProfile,
   makeSelectUserData,
   makeSelectUsers,
+  makeSelectRoles,
   makeSelectUserCount,
   makeSelectApiToken,
   getUserInfo,

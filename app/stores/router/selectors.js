@@ -8,4 +8,16 @@ const makeSelectLocation = () =>
     routerState => routerState.location,
   );
 
-export { makeSelectLocation };
+const makeSelectPathName = () =>
+  createSelector(
+    makeSelectLocation,
+    locationState => locationState.pathname,
+  );
+
+const makeSelectSearch = () =>
+  createSelector(
+    makeSelectLocation,
+    locationState => locationState.search,
+  );
+
+export { makeSelectLocation, makeSelectPathName, makeSelectSearch };

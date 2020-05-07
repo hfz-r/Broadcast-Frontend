@@ -15,6 +15,14 @@ export default ({ apiUrl, get, put }) => {
       sessionToken,
     });
 
+  const fetchRoles = sessionToken =>
+    get({
+      url: apiUrl,
+      endPoint: '/security/roles',
+      contentType: 'application/json',
+      sessionToken,
+    });
+
   const editUser = (payload, username, sessionToken) =>
     put({
       url: apiUrl,
@@ -24,5 +32,5 @@ export default ({ apiUrl, get, put }) => {
       sessionToken,
     });
 
-  return { currentUser, editUser, fetchUsers };
+  return { currentUser, editUser, fetchUsers, fetchRoles };
 };

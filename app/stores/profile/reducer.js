@@ -7,6 +7,7 @@ export const initialState = {
   apiToken: Remote.NotAsked,
   userData: Remote.NotAsked,
   users: Remote.NotAsked,
+  roles: Remote.NotAsked,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -45,6 +46,15 @@ const profileReducer = (state = initialState, action) =>
         break;
       case T.SET_API_TOKEN_FAILURE:
         draft.apiToken = Remote.Failure(action.payload.error);
+        break;
+      case T.FETCH_ROLES_LOADING:
+        draft.roles = Remote.Loading;
+        break;
+      case T.FETCH_ROLES_SUCCESS:
+        draft.roles = Remote.Success(action.payload.roles);
+        break;
+      case T.FETCH_ROLES_FAILURE:
+        draft.roles = Remote.Failure(action.payload.error);
         break;
       case T.GET_USER_INFO_SUCCESS: {
         return assocPath(

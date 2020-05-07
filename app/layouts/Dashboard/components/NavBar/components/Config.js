@@ -27,8 +27,8 @@ export default [
             href: '/management/users',
           },
           {
-            title: 'Permission',
-            href: '/management/permission',
+            title: 'Roles',
+            href: '/management/roles',
           },
         ],
       },

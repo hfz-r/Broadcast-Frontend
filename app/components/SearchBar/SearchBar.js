@@ -51,7 +51,7 @@ const SearchBar = props => {
           component={Search}
         />
       </Grid>
-      <Grid item>
+      {/* <Grid item>
         <Button
           className={classes.filterButton}
           color="primary"
@@ -66,7 +66,7 @@ const SearchBar = props => {
         onClose={handleFilterClose}
         onFilter={onFilter}
         open={openFilter}
-      />
+      /> */}
     </Grid>
   );
 };
