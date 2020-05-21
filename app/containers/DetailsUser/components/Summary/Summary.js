@@ -68,4 +68,5 @@ Summary.propTypes = {
 
 export default reduxForm({
   form: 'userMgmt',
+  destroyOnUnmount: false,
 })(Summary);

@@ -128,7 +128,7 @@ const Results = props => {
             <Link
               color="inherit"
               component={RouterLink}
-              to={`/management/${user.username}`}
+              to={`/management/u/${user.username}`}
               variant="h6"
             >
               {user.given_name}
@@ -151,7 +151,7 @@ const Results = props => {
           color="primary"
           component={RouterLink}
           size="small"
-          to={`/management/${user.username}`}
+          to={`/management/u/${user.username}`}
           variant="outlined"
         >
           View

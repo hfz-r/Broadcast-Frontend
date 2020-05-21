@@ -68,16 +68,16 @@ const AboutAnnouncement = props => {
 
   const classes = useStyles();
 
-  useEffect(() => {
-    formActions.initialize(formName, {
-      projectAbout: {
-        // category: ['Others'],
-        // tags: ['hartalega'],
-        start_date: moment(),
-        end_date: moment().add(1, 'day'),
-      },
-    });
-  }, []);
+  // useEffect(() => {
+  //   formActions.initialize(formName, {
+  //     projectAbout: {
+  //       // category: ['Others'],
+  //       // tags: ['hartalega'],
+  //       start_date: moment(),
+  //       end_date: moment().add(1, 'day'),
+  //     },
+  //   });
+  // }, []);
 
   const handleKeyDown = e => {
     if (e.key === 'Enter') {

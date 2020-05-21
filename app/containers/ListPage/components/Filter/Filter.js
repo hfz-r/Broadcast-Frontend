@@ -114,7 +114,7 @@ const Filter = props => {
             value={chips}
           />
         ))}
-        <FormControlLabel
+        {/* <FormControlLabel
           className={classes.inNetwork}
           control={
             <Checkbox
@@ -123,7 +123,7 @@ const Filter = props => {
             />
           }
           label="In network"
-        />
+        /> */}
       </div>
     </Card>
   );

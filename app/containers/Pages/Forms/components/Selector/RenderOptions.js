@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { FormHelperText, Typography, Radio, colors } from '@material-ui/core';
-import { options } from './options';
 
 const useStyles = makeStyles(theme => ({
   option: {
@@ -15,6 +14,9 @@ const useStyles = makeStyles(theme => ({
     '& + &': {
       marginTop: theme.spacing(2),
     },
+  },
+  publicHighlighter: {
+    border: `1px dashed ${theme.palette.divider}`,
   },
   selectedOption: {
     backgroundColor: colors.grey[50],
@@ -36,6 +38,7 @@ const useStyles = makeStyles(theme => ({
 
 const RenderOptions = props => {
   const {
+    payload,
     input,
     meta: { touched, error },
     ...rest
@@ -44,36 +47,39 @@ const RenderOptions = props => {
   const classes = useStyles();
 
   const handleChange = (event, option) => {
-    input.onChange(option.value);
+    input.onChange(option.slug);
   };
 
   return (
     <React.Fragment>
-      {options.map(option => (
+      {payload.map(project => (
         <div
           className={clsx(
             classes.option,
             {
-              [classes.selectedOption]: input.value === option.value,
+              [classes.selectedOption]: input.value === project.slug,
+            },
+            {
+              [classes.publicHighlighter]: project.slug === 'public',
             },
             {
               [classes.invalidOption]: touched && error,
             },
           )}
-          key={option.value}
+          key={project.slug}
         >
           <Radio
             {...rest}
-            checked={input.value === option.value}
+            checked={input.value === project.slug}
             className={classes.optionRadio}
             color="primary"
-            onClick={event => handleChange(event, option)}
+            onClick={event => handleChange(event, project)}
           />
           <div className={classes.optionDetails}>
             <Typography gutterBottom variant="h5">
-              {option.title}
+              {project.project}
             </Typography>
-            <Typography variant="body1">{option.description}</Typography>
+            <Typography variant="body1">{project.description}</Typography>
           </div>
         </div>
       ))}
@@ -85,6 +91,7 @@ const RenderOptions = props => {
 };
 
 RenderOptions.propTypes = {
+  payload: PropTypes.array,
   input: PropTypes.object,
   meta: PropTypes.object,
 };

@@ -37,7 +37,7 @@ const UserMgmtDetails = props => {
   ];
 
   if (!tab) {
-    return <Redirect to={`/management/${username}/summary`} />;
+    return <Redirect to={`/management/u/${username}/summary`} />;
   }
 
   if (!tabs.find(t => t.value === tab)) {

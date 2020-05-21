@@ -12,5 +12,7 @@
   "modals.autodisconnection.explain": "Anda tidak aktif selama {duration} minit.",
   "modals.autodisconnection.explain2": "Klik 'Batal' jika anda tidak mahu log keluar secara automatik.",
   "modals.autodisconnection.logout": "Log keluar",
-  "modals.autodisconnection.title": "Adakah anda masih ada?"
+  "modals.autodisconnection.title": "Adakah anda masih ada?",
+  "modals.viewpermission.title": "Senarai Kebenaran",
+  "general.formhelper.required": "Dikehendaki"
 }

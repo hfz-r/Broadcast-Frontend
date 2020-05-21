@@ -1,68 +1,52 @@
+/* eslint-disable indent */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
-import { actions, reducers, rootSaga, selectors } from 'stores';
-import createApi from 'api';
+import { actions, selectors } from 'stores';
 import Loading from './template.loading';
 import Failure from './template.failure';
 import AnnouncementDetails from './template.success';
 
 class AnnouncementDetailsContainer extends React.PureComponent {
-  static propTypes = {
-    data: PropTypes.object,
-    apiToken: PropTypes.object,
-    computedMatch: PropTypes.object.isRequired,
-    announcementActions: PropTypes.object,
-  };
-
   componentDidMount() {
-    const { apiToken, computedMatch } = this.props;
-    const sessionToken = apiToken.getOrElse('');
-
-    this.props.announcementActions.fetchMessage(
-      computedMatch.params.slug,
-      sessionToken,
-    );
+    const { computedMatch } = this.props;
+    this.props.announcementActions.fetchMessage(computedMatch.params.slug);
   }
 
   render() {
     const { data, ...rest } = this.props;
 
-    return data.cata({
-      Success: ({ message }) => (
-        <AnnouncementDetails announcement={message} {...rest} />
-      ),
-      Failure: message => <Failure message={message} />,
-      Loading: () => <Loading />,
-      NotAsked: () => <Loading />,
-    });
+    return !data
+      ? null
+      : data.cata({
+          Success: value => (
+            <AnnouncementDetails {...rest} announcement={value} />
+          ),
+          Failure: message => <Failure message={message} />,
+          Loading: () => <Loading />,
+          NotAsked: () => <Loading />,
+        });
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  data: selectors.announcement.makeSelectMessage(),
-  dataCount: selectors.announcement.makeSelectCountMessages(),
-  apiToken: selectors.profile.makeSelectApiToken(),
-});
+AnnouncementDetailsContainer.propTypes = {
+  data: PropTypes.object,
+  computedMatch: PropTypes.object.isRequired,
+  announcementActions: PropTypes.object,
+};
+
+const mapStateToProps = (state, ownProps) => {
+  const { computedMatch } = ownProps;
+  const data = selectors.announcement.getMessage(
+    state,
+    computedMatch.params.slug,
+  );
+  return { data };
+};
 
 const mapDispatchToProps = dispatch => ({
   announcementActions: bindActionCreators(actions.announcement, dispatch),
-});
-
-const api = createApi({ apiKey: '1770d5d9-bcea-4d28-ad21-6cbd5be018a8' });
-const withSaga = injectSaga({
-  key: 'announcement',
-  saga: rootSaga.announcementSaga,
-  args: { api },
-});
-
-const withReducer = injectReducer({
-  key: 'announcement',
-  reducer: reducers.announcementReducer,
 });
 
 const withConnect = connect(
@@ -70,8 +54,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(
-  withSaga,
-  withReducer,
-  withConnect,
-)(AnnouncementDetailsContainer);
+export default compose(withConnect)(AnnouncementDetailsContainer);

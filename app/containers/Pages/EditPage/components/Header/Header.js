@@ -1,32 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Typography } from '@material-ui/core';
+import { Breadcrumb } from './components';
 
 const useStyles = makeStyles(() => ({
   root: {},
 }));
 
-const Header = props => {
-  const { className, ...rest } = props;
-
+const Header = ({ message }) => {
   const classes = useStyles();
 
   return (
-    <div {...rest} className={clsx(classes.root, className)}>
-      <Typography component="h2" gutterBottom variant="overline">
-        New Announcement
-      </Typography>
+    <div className={classes.root}>
+      <Breadcrumb slug={message.slug} />
       <Typography component="h1" variant="h3">
-        Have something on your mind?
+        {message.projectAbout.title}
       </Typography>
     </div>
   );
 };
 
 Header.propTypes = {
-  className: PropTypes.string,
+  message: PropTypes.object,
 };
 
 export default Header;

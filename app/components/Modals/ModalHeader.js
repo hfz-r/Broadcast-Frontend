@@ -8,12 +8,12 @@ const useStyles = makeStyles({
   root: {
     position: 'relative',
     display: 'flex',
-    justifyContent: props => (props.center ? 'center' : 'space-between'),
     alignItems: 'center',
     width: '100%',
     padding: '20px 30px',
     boxSizing: 'border-box',
     borderBottom: `1px solid ${colors.grey[100]}`,
+    justifyContent: props => (props.center ? 'center' : 'space-between'),
     paddingLeft: props => `${props.paddingHorizontal}!important`,
     paddingRight: props => `${props.paddingHorizontal}!important`,
     '& > :first-child': {

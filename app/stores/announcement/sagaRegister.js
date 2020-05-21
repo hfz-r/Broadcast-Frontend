@@ -1,11 +1,15 @@
 import { takeLatest } from 'redux-saga/effects';
-import { FETCH_MESSAGES, CREATE_MESSAGE, FETCH_MESSAGE } from './constants';
+import * as T from './constants';
 import sagas from './sagas';
 
 export default function* annoucementSaga({ api }) {
   const saga = sagas({ api });
 
-  yield takeLatest(FETCH_MESSAGES, saga.fetchMessages);
-  yield takeLatest(CREATE_MESSAGE, saga.submitMessage);
-  yield takeLatest(FETCH_MESSAGE, saga.fetchMessage);
+  yield takeLatest(T.FETCH_MESSAGES, saga.fetchMessages);
+  yield takeLatest(T.FETCH_PROJECTS, saga.fetchProjects);
+  yield takeLatest(T.CREATE_MESSAGE, saga.submitMessage);
+  yield takeLatest(T.CREATE_PROJECT, saga.createProject);
+  yield takeLatest(T.FETCH_PROJECT, saga.getProject);
+  yield takeLatest(T.EDIT_PROJECT, saga.editProject);
+  yield takeLatest(T.FETCH_MESSAGE, saga.getMessage);
 }

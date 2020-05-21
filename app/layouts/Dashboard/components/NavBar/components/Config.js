@@ -17,21 +17,25 @@ export default [
         href: '/home',
         icon: DashboardIcon,
       },
-      {
-        title: 'Management',
-        href: '/management',
-        icon: BarChartIcon,
-        children: [
-          {
-            title: 'Users',
-            href: '/management/users',
-          },
-          {
-            title: 'Roles',
-            href: '/management/roles',
-          },
-        ],
-      },
+      // {
+      //   title: 'Management',
+      //   href: '/management',
+      //   icon: BarChartIcon,
+      //   children: [
+      //     {
+      //       title: 'Users',
+      //       href: '/management/users',
+      //     },
+      //     {
+      //       title: 'Roles',
+      //       href: '/management/roles',
+      //     },
+      //     {
+      //       title: 'Project',
+      //       href: '/management/project',
+      //     },
+      //   ],
+      // },
       {
         title: 'Announcement',
         href: '/announcements',
@@ -39,7 +43,7 @@ export default [
         children: [
           {
             title: 'Create',
-            href: '/announcements/create',
+            href: '/announcements/page',
           },
           {
             title: 'Browse',
@@ -66,66 +70,54 @@ export default [
   {
     title: 'Settings',
     pages: [
+      // {
+      //   title: 'Profile',
+      //   href: '/profile',
+      //   icon: PersonIcon,
+      //   children: [
+      //     {
+      //       title: 'Child 1',
+      //       href: '/profile/1/child1',
+      //     },
+      //     {
+      //       title: 'Child 2',
+      //       href: '/profile/1/child2',
+      //     },
+      //     {
+      //       title: 'Timeline',
+      //       href: '/profile/1/timeline',
+      //     },
+      //     {
+      //       title: 'Connections',
+      //       href: '/profile/1/connections',
+      //     },
+      //     {
+      //       title: 'Projects',
+      //       href: '/profile/1/projects',
+      //     },
+      //     {
+      //       title: 'Reviews',
+      //       href: '/profile/1/reviews',
+      //     },
+      //   ],
+      // },
       {
-        title: 'Profile',
-        href: '/profile',
-        icon: PersonIcon,
+        title: 'Management',
+        href: '/management',
+        icon: BarChartIcon,
         children: [
           {
-            title: 'Child 1',
-            href: '/profile/1/child1',
+            title: 'Users',
+            href: '/management/users',
           },
           {
-            title: 'Child 2',
-            href: '/profile/1/child2',
-          },
-          // {
-          //   title: 'Timeline',
-          //   href: '/profile/1/timeline',
-          // },
-          // {
-          //   title: 'Connections',
-          //   href: '/profile/1/connections',
-          // },
-          // {
-          //   title: 'Projects',
-          //   href: '/profile/1/projects',
-          // },
-          // {
-          //   title: 'Reviews',
-          //   href: '/profile/1/reviews',
-          // },
-        ],
-      },
-      {
-        title: 'Settings',
-        href: '/settings',
-        icon: SettingsIcon,
-        children: [
-          {
-            title: 'Child 1',
-            href: '/settings/child1',
+            title: 'Roles',
+            href: '/management/roles',
           },
           {
-            title: 'Child 2',
-            href: '/settings/child2',
+            title: 'Project',
+            href: '/management/project',
           },
-          // {
-          //   title: 'General',
-          //   href: '/settings/general',
-          // },
-          // {
-          //   title: 'Subscription',
-          //   href: '/settings/subscription',
-          // },
-          // {
-          //   title: 'Notifications',
-          //   href: '/settings/notifications',
-          // },
-          // {
-          //   title: 'Security',
-          //   href: '/settings/security',
-          // },
         ],
       },
     ],

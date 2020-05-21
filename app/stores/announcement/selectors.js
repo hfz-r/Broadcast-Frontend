@@ -17,22 +17,29 @@ const makeSelectCountMessages = () =>
       announcementState.messages.map(path(['messageCount'])).getOrElse(0),
   );
 
-const makeSelectCreating = () =>
+const makeSelectCreateMessage = () =>
   createSelector(
     selectAnnouncement,
-    announcementState => announcementState.creating,
+    announcementState => announcementState.newMessage,
   );
 
-const makeSelectMessage = () =>
+const getMessage = (state, slug) => path([slug], selectAnnouncement(state));
+
+const makeSelectProjects = () =>
   createSelector(
     selectAnnouncement,
-    announcementState => announcementState.message,
+    announcementState => announcementState.projects,
   );
+
+const getProject = (state, project) =>
+  path([project], selectAnnouncement(state));
 
 export {
   selectAnnouncement,
   makeSelectMessages,
   makeSelectCountMessages,
-  makeSelectCreating,
-  makeSelectMessage,
+  makeSelectCreateMessage,
+  getMessage,
+  makeSelectProjects,
+  getProject,
 };

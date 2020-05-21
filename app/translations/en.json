@@ -12,5 +12,7 @@
   "modals.autodisconnection.explain": "You've been inactive for {duration} minutes.",
   "modals.autodisconnection.explain2": "Click 'Cancel' if you don't want to be logged out automatically.",
   "modals.autodisconnection.logout": "Log me out",
-  "modals.autodisconnection.title": "Are you still there?"
+  "modals.autodisconnection.title": "Are you still there?",
+  "modals.viewpermission.title": "Permission List",
+  "general.formhelper.required": "Required"
 }

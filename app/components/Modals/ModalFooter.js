@@ -18,9 +18,9 @@ const useStyles = makeStyles({
   footer: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: props => selectAlignment(props.align),
     alignItems: 'center',
     width: '100%',
+    justifyContent: props => selectAlignment(props.align),
   },
 });
 

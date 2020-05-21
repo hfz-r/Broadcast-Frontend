@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
+import { Link as RouterLink } from 'react-router-dom';
 import { Typography, Grid, Button, colors } from '@material-ui/core';
 import { Share } from '@material-ui/icons';
 import { Labeled } from 'components';
@@ -56,12 +57,17 @@ const Header = props => {
           </div>
         </Grid>
         <Grid item>
-          <Button className={classes.shareButton} variant="contained">
+          {/* <Button className={classes.shareButton} variant="contained">
             <Share className={classes.shareIcon} />
             Share
-          </Button>
-          <Button className={classes.editButton} variant="contained">
-            Edit
+          </Button> */}
+          <Button
+            className={classes.editButton}
+            component={RouterLink}
+            to={`/announcements/page/edit/${announcement.slug}`}
+            variant="contained"
+          >
+            Edit this page
           </Button>
         </Grid>
       </Grid>

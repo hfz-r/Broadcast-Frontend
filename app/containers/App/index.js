@@ -9,12 +9,14 @@ import WidgetLayout from 'layouts/Widget';
 import Login from 'containers/Login';
 import Logout from 'containers/Logout';
 import Dashboard from 'containers/DashboardPage';
+import AnnouncementPages from 'containers/Pages';
 import AnnouncementList from 'containers/ListPage';
-import AnnouncementCreate from 'containers/CreatePage';
 import AnnouncementDetails from 'containers/DetailsPage';
 import UserMgmt from 'containers/UserMgmt';
 import UserMgmtDetails from 'containers/DetailsUser';
+import ProjectMgmtDetails from 'containers/DetailsProject';
 import RoleMgmt from 'containers/RoleMgmt';
+import ProjectMgmt from 'containers/ProjectMgmt';
 
 const App = props => {
   const { isAuthenticated } = props;
@@ -34,8 +36,8 @@ const App = props => {
         component={AnnouncementList}
       />
       <DashboardLayout
-        path="/announcements/create"
-        component={AnnouncementCreate}
+        path="/announcements/page"
+        component={AnnouncementPages}
       />
       <DashboardLayout
         path="/announcements/:slug"
@@ -47,15 +49,21 @@ const App = props => {
         component={AnnouncementDetails}
         exact
       />
+      <DashboardLayout path="/management/project" component={ProjectMgmt} />
       <DashboardLayout path="/management/roles" component={RoleMgmt} />
       <DashboardLayout path="/management/users" component={UserMgmt} />
       <DashboardLayout
-        path="/management/:username"
+        path="/management/p/:project"
+        component={ProjectMgmtDetails}
+        exact
+      />
+      <DashboardLayout
+        path="/management/u/:username"
         component={UserMgmtDetails}
         exact
       />
       <DashboardLayout
-        path="/management/:username/:tab"
+        path="/management/u/:username/:tab"
         component={UserMgmtDetails}
         exact
       />

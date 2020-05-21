@@ -53,7 +53,7 @@ const OtherActions = props => {
           </Button>
           <Button>
             <GetAppIcon className={classes.buttonIcon} />
-            Export announcement data
+            Export user data
           </Button>
         </div>
         <Typography className={classes.notice} variant="body2">

@@ -10,6 +10,7 @@ import {
   getDefaultKeyBinding,
 } from 'draft-js';
 import { stateToMarkdown } from 'draft-js-export-markdown';
+import { stateFromMarkdown } from 'draft-js-import-markdown';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
 import { Paper, Divider } from '@material-ui/core';
@@ -106,6 +107,11 @@ const RichEditor = props => {
       setEditorState(clearState);
     }
   }, [pristine]);
+
+  useEffect(() => {
+    const contentState = stateFromMarkdown(input.value);
+    setEditorState(EditorState.createWithContent(contentState));
+  }, []);
 
   const handleContainerClick = () => {
     editorRef.current.focus();

@@ -33,7 +33,7 @@ const Header = props => {
           <Button
             color="primary"
             component={RouterLink}
-            to="/announcements/create"
+            to="/announcements/page/create"
             variant="contained"
           >
             <AddIcon className={classes.addIcon} />

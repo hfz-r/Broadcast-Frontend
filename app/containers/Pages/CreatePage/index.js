@@ -3,20 +3,10 @@ import PropTypes from 'prop-types';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
-import { actions, rootSaga, reducers, selectors } from 'stores';
-import createApi from 'api';
-import AnnouncementCreate from './template';
+import { actions, selectors } from 'stores';
+import Template from '../Forms';
 
 class AnnouncementCreateContainer extends React.PureComponent {
-  static propTypes = {
-    data: PropTypes.object,
-    apiToken: PropTypes.object,
-    formActions: PropTypes.object,
-    announcementActions: PropTypes.object,
-  };
-
   componentWillUnmount() {
     this.props.formActions.reset('createProject');
   }
@@ -24,7 +14,6 @@ class AnnouncementCreateContainer extends React.PureComponent {
   handleSubmit = values => {
     const { apiToken } = this.props;
     const sessionToken = apiToken.getOrElse('');
-
     this.props.announcementActions.createMessage(values, sessionToken);
   };
 
@@ -44,12 +33,19 @@ class AnnouncementCreateContainer extends React.PureComponent {
       onSubmit: this.handleSubmit,
     };
 
-    return <AnnouncementCreate {...this.props} {...childProps} />;
+    return <Template {...this.props} {...childProps} />;
   }
 }
 
+AnnouncementCreateContainer.propTypes = {
+  data: PropTypes.object,
+  apiToken: PropTypes.object,
+  formActions: PropTypes.object,
+  announcementActions: PropTypes.object,
+};
+
 const mapStateToProps = createStructuredSelector({
-  data: selectors.announcement.makeSelectCreating(),
+  data: selectors.announcement.makeSelectCreateMessage(),
   apiToken: selectors.profile.makeSelectApiToken(),
 });
 
@@ -58,25 +54,9 @@ const mapDispatchToProps = dispatch => ({
   announcementActions: bindActionCreators(actions.announcement, dispatch),
 });
 
-const api = createApi({ apiKey: '1770d5d9-bcea-4d28-ad21-6cbd5be018a8' });
-const withSaga = injectSaga({
-  key: 'announcement',
-  saga: rootSaga.announcementSaga,
-  args: { api },
-});
-
-const withReducer = injectReducer({
-  key: 'announcement',
-  reducer: reducers.announcementReducer,
-});
-
 const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps,
 );
 
-export default compose(
-  withSaga,
-  withReducer,
-  withConnect,
-)(AnnouncementCreateContainer);
+export default compose(withConnect)(AnnouncementCreateContainer);

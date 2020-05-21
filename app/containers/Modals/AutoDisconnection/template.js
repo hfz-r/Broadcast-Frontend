@@ -58,7 +58,6 @@ AutoDisconnection.propTypes = {
   position: PropTypes.number,
   total: PropTypes.number,
   handleCancel: PropTypes.func,
-  handleClick: PropTypes.func,
 };
 
 AutoDisconnection.defaultProps = {

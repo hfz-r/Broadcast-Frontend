@@ -1,8 +1,16 @@
-export default ({ apiUrl, get, post }) => {
+export default ({ apiUrl, get, post, put }) => {
   const fetchMessages = sessionToken =>
     get({
       url: apiUrl,
       endPoint: '/messages',
+      contentType: 'application/json',
+      sessionToken,
+    });
+
+  const fetchProjects = sessionToken =>
+    get({
+      url: apiUrl,
+      endPoint: '/projects',
       contentType: 'application/json',
       sessionToken,
     });
@@ -16,13 +24,29 @@ export default ({ apiUrl, get, post }) => {
       sessionToken,
     });
 
-  const fetchMessage = ({ slug, sessionToken }) =>
-    get({
+  const createProject = (payload, sessionToken) =>
+    post({
       url: apiUrl,
-      endPoint: `/messages/${slug}`,
+      endPoint: '/projects',
       contentType: 'application/json',
+      data: { project: payload },
       sessionToken,
     });
 
-  return { fetchMessages, createMessage, fetchMessage };
+  const editProject = (payload, project, sessionToken) =>
+    put({
+      url: apiUrl,
+      endPoint: `/projects/${project}`,
+      contentType: 'application/json',
+      data: { project: payload },
+      sessionToken,
+    });
+
+  return {
+    fetchMessages,
+    fetchProjects,
+    createMessage,
+    createProject,
+    editProject,
+  };
 };

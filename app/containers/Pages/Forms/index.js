@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const AnnouncementCreate = props => {
+const FormTemplate = props => {
   const { invalid, pristine, submitting, busy, apiError, ...rest } = props;
   const { reset, handleSubmit, formActions } = rest;
 
@@ -75,8 +75,7 @@ const AnnouncementCreate = props => {
   useEffect(() => setOpenAlert(!!apiError), [!!apiError]);
 
   return (
-    <Page className={classes.root} title="Announcement Create">
-      <Header />
+    <React.Fragment>
       <form onSubmit={handleSubmit}>
         <Collapse in={openAlert}>
           <Alert
@@ -151,11 +150,11 @@ const AnnouncementCreate = props => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-    </Page>
+    </React.Fragment>
   );
 };
 
-AnnouncementCreate.propTypes = {
+FormTemplate.propTypes = {
   invalid: PropTypes.bool,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
@@ -168,4 +167,4 @@ AnnouncementCreate.propTypes = {
 
 export default reduxForm({
   form: 'createProject',
-})(AnnouncementCreate);
+})(FormTemplate);
