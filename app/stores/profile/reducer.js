@@ -73,6 +73,23 @@ const profileReducer = (state = initialState, action) =>
       case T.GET_USER_INFO_LOADING: {
         return assocPath([action.payload.username], Remote.Loading, state);
       }
+      case T.FETCH_ROLE_SUCCESS: {
+        return assocPath(
+          [action.payload.role],
+          Remote.Success(action.payload.roles),
+          state,
+        );
+      }
+      case T.FETCH_ROLE_FAILURE: {
+        return assocPath(
+          [action.payload.role],
+          Remote.Failure(action.payload.error),
+          state,
+        );
+      }
+      case T.FETCH_ROLE_LOADING: {
+        return assocPath([action.payload.role], Remote.Loading, state);
+      }
     }
   });
 

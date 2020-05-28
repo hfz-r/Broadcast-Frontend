@@ -12,11 +12,9 @@ import {
 } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import CloseIcon from '@material-ui/icons/Close';
-import { Page } from 'components';
 import {
   AboutAnnouncement,
   AnnouncementDetails,
-  Header,
   ImagesFiles,
   Preferences,
   ProjectSelector,
@@ -24,12 +22,6 @@ import {
 import M from './messages';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    width: theme.breakpoints.values.lg,
-    maxWidth: '100%',
-    margin: '0 auto',
-    padding: theme.spacing(3, 3, 6, 3),
-  },
   location: {
     marginTop: theme.spacing(3),
   },
@@ -94,7 +86,11 @@ const FormTemplate = props => {
               </IconButton>
             }
           >
-            <AlertTitle>Error - Failed to create announcement.</AlertTitle>
+            <AlertTitle>
+              {props.mode === 'create'
+                ? 'Error - Failed to create announcement.'
+                : 'Error - Failed to edit announcement.'}
+            </AlertTitle>
             {apiError &&
               (typeof apiError === 'string' ? (
                 apiError
@@ -139,7 +135,11 @@ const FormTemplate = props => {
             disabled={invalid || submitting || busy}
             onClick={() => formActions.submit('createProject')}
           >
-            <FormattedMessage {...M.buttonCreateAnnouncement} />
+            {props.mode === 'create' ? (
+              <FormattedMessage {...M.buttonCreateAnnouncement} />
+            ) : (
+              <FormattedMessage {...M.buttonEditAnnouncement} />
+            )}
           </Button>
         </div>
       </form>
@@ -155,6 +155,7 @@ const FormTemplate = props => {
 };
 
 FormTemplate.propTypes = {
+  mode: PropTypes.oneOf(['create', 'edit']),
   invalid: PropTypes.bool,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,

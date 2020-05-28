@@ -36,6 +36,8 @@ const makeSelectApiToken = () =>
 
 const getUserInfo = (state, username) => path([username], selectProfile(state));
 
+const getRole = (state, role) => path([role], selectProfile(state));
+
 export {
   selectProfile,
   makeSelectUserData,
@@ -44,4 +46,5 @@ export {
   makeSelectUserCount,
   makeSelectApiToken,
   getUserInfo,
+  getRole,
 };

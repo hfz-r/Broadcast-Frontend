@@ -9,7 +9,9 @@ export default function* profileSaga({ api }) {
   yield takeLatest(T.FETCH_USER, saga.fetchUser);
   yield takeLatest(T.FETCH_USERS, saga.fetchUsers);
   yield takeLatest(T.FETCH_ROLES, saga.fetchRoles);
+  yield takeLatest(T.FETCH_ROLE, saga.getRole);
   yield takeLatest(T.GET_USER_INFO, saga.getUserInfo);
+  yield takeLatest(T.CREATE_USER, saga.createUser);
   yield takeLatest(T.EDIT_USER_INFO, saga.editUserInfo);
   yield takeLatest(T.CLEAR_SESSION, saga.clearSession);
 }

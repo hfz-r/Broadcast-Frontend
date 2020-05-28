@@ -1,9 +1,6 @@
 import * as T from './constants';
 
-export const fetchMessages = sessionToken => ({
-  type: T.FETCH_MESSAGES,
-  payload: sessionToken,
-});
+export const fetchMessages = () => ({ type: T.FETCH_MESSAGES });
 export const fetchMessagesLoading = () => ({ type: T.FETCH_MESSAGES_LOADING });
 export const fetchMessagesSuccess = messages => ({
   type: T.FETCH_MESSAGES_SUCCESS,
@@ -43,6 +40,23 @@ export const fetchMessageSuccess = (slug, message) => ({
 export const fetchMessageFailure = (slug, error) => ({
   type: T.FETCH_MESSAGE_FAILURE,
   payload: { slug, error },
+});
+
+export const editMessage = (slug, message) => ({
+  type: T.EDIT_MESSAGE,
+  payload: { slug, message },
+});
+export const editMessageError = (slug, error) => ({
+  type: T.EDIT_MESSAGE_FAILURE,
+  payload: { slug, error },
+});
+export const editMessageLoading = slug => ({
+  type: T.EDIT_MESSAGE_LOADING,
+  payload: { slug },
+});
+export const editMessageSuccess = slug => ({
+  type: T.EDIT_MESSAGE_SUCCESS,
+  payload: { slug },
 });
 
 export const fetchProjects = () => ({ type: T.FETCH_PROJECTS });

@@ -9,7 +9,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Header = props => {
-  const { className, ...rest } = props;
+  const { className, onAddUser, ...rest } = props;
 
   const classes = useStyles();
 
@@ -25,7 +25,7 @@ const Header = props => {
           </Typography>
         </Grid>
         <Grid item>
-          <Button color="primary" variant="contained">
+          <Button color="primary" variant="contained" onClick={onAddUser}>
             Add user
           </Button>
         </Grid>
@@ -36,6 +36,7 @@ const Header = props => {
 
 Header.propTypes = {
   className: PropTypes.string,
+  onAddUser: PropTypes.func,
 };
 
 export default Header;

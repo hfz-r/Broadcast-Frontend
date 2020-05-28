@@ -12,4 +12,5 @@ export default function* annoucementSaga({ api }) {
   yield takeLatest(T.FETCH_PROJECT, saga.getProject);
   yield takeLatest(T.EDIT_PROJECT, saga.editProject);
   yield takeLatest(T.FETCH_MESSAGE, saga.getMessage);
+  yield takeLatest(T.EDIT_MESSAGE, saga.editMessage);
 }

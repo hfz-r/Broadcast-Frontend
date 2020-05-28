@@ -43,6 +43,7 @@ const Header = props => {
       <Grid alignItems="flex-end" container justify="space-between" spacing={3}>
         <Grid item>
           <Breadcrumb
+            slug={announcement.slug}
             page={announcement.message_id}
             totalPage={announcementCount}
           />
@@ -67,7 +68,7 @@ const Header = props => {
             to={`/announcements/page/edit/${announcement.slug}`}
             variant="contained"
           >
-            Edit this page
+            Edit
           </Button>
         </Grid>
       </Grid>

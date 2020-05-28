@@ -1,4 +1,4 @@
-export default ({ apiUrl, get, put }) => {
+export default ({ apiUrl, get, post, put }) => {
   const currentUser = sessionToken =>
     get({
       url: apiUrl,
@@ -23,6 +23,15 @@ export default ({ apiUrl, get, put }) => {
       sessionToken,
     });
 
+  const createUser = (payload, sessionToken) =>
+    post({
+      url: apiUrl,
+      endPoint: '/users',
+      contentType: 'application/json',
+      data: { user: payload },
+      sessionToken,
+    });
+
   const editUser = (payload, username, sessionToken) =>
     put({
       url: apiUrl,
@@ -32,5 +41,5 @@ export default ({ apiUrl, get, put }) => {
       sessionToken,
     });
 
-  return { currentUser, editUser, fetchUsers, fetchRoles };
+  return { currentUser, createUser, editUser, fetchUsers, fetchRoles };
 };

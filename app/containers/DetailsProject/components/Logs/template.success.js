@@ -44,7 +44,7 @@ const AnnouncementLog = props => {
 
   return (
     <Card className={classes.root}>
-      <CardHeader title="Announcement log" />
+      <CardHeader title="Announcements" />
       <Divider />
       <CardContent className={classes.content}>
         <PerfectScrollbar>

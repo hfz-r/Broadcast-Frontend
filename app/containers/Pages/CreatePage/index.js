@@ -1,12 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { actions, selectors } from 'stores';
-import Template from '../Forms';
+import CreatePage from './template';
 
 class AnnouncementCreateContainer extends React.PureComponent {
+  componentDidMount() {
+    this.props.formActions.initialize('createProject', {
+      projectAbout: {
+        start_date: moment(),
+        end_date: moment().add(1, 'day'),
+      },
+    });
+  }
+
   componentWillUnmount() {
     this.props.formActions.reset('createProject');
   }
@@ -27,13 +37,13 @@ class AnnouncementCreateContainer extends React.PureComponent {
       NotAsked: () => ({ error: null, busy: false }),
     });
 
-    const childProps = {
+    const createProps = {
       busy,
       apiError: error,
       onSubmit: this.handleSubmit,
     };
 
-    return <Template {...this.props} {...childProps} />;
+    return <CreatePage {...this.props} {...createProps} />;
   }
 }
 

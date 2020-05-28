@@ -8,7 +8,9 @@ import { Modal, ModalBody, ModalHeader, ModalFooter } from 'components';
 import { RenderTextField } from 'components/Form';
 
 const useStyles = makeStyles(() => ({
-  root: {},
+  root: {
+    position: 'absolute',
+  },
   content: {
     // marginTop: theme.spacing(1),
   },
@@ -31,7 +33,12 @@ const EditProject = props => {
   const classes = useStyles();
 
   return (
-    <Modal size="medium" position={position} total={total}>
+    <Modal
+      size="medium"
+      className={classes.root}
+      position={position}
+      total={total}
+    >
       <form onSubmit={handleSubmit}>
         <ModalHeader
           style={{ borderBottom: 0, paddingBottom: 0 }}

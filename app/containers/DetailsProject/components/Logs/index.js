@@ -10,9 +10,7 @@ import AnnouncementLog from './template.success';
 
 class AnnouncementLogContainer extends React.PureComponent {
   componentDidMount() {
-    const { apiToken } = this.props;
-    const sessionToken = apiToken.getOrElse('');
-    this.props.announcementActions.fetchMessages(sessionToken);
+    this.props.announcementActions.fetchMessages();
   }
 
   render() {
@@ -34,13 +32,11 @@ class AnnouncementLogContainer extends React.PureComponent {
 AnnouncementLogContainer.propTypes = {
   data: PropTypes.object,
   messageIds: PropTypes.array,
-  apiToken: PropTypes.object,
   announcementActions: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   data: selectors.announcement.makeSelectMessages(),
-  apiToken: selectors.profile.makeSelectApiToken(),
 });
 
 const withConnect = connect(

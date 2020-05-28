@@ -59,7 +59,7 @@ const Announcements = props => {
   const classes = useStyles();
   const sortRef = useRef(null);
   const [openSort, setOpenSort] = useState(false);
-  const [selectedSort, setSelectedSort] = useState('Most popular');
+  const [selectedSort, setSelectedSort] = useState('Most recent');
   const [mode, setMode] = useState('grid');
 
   const handleSortOpen = () => {

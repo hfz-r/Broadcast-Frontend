@@ -2,16 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { reduxForm } from 'redux-form';
+import { makeStyles } from '@material-ui/styles';
 import { Button, Typography } from '@material-ui/core';
 import TimerIcon from '@material-ui/icons/Timer';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'components';
+
+const useStyles = makeStyles({
+  root: {
+    position: 'absolute',
+  },
+});
 
 const AutoDisconnection = props => {
   const { duration, position, total, ...rest } = props;
   const { handleSubmit, handleCancel } = rest;
 
+  const classes = useStyles();
+
   return (
-    <Modal size="large" position={position} total={total}>
+    <Modal
+      size="large"
+      className={classes.root}
+      position={position}
+      total={total}
+    >
       <form onSubmit={handleSubmit}>
         <ModalHeader onClose={handleCancel} icon={TimerIcon}>
           <FormattedMessage

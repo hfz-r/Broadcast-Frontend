@@ -10,6 +10,7 @@ import {
 import { applySpec, find, mergeAll, pipe, prop, values } from 'ramda';
 import moment from 'moment';
 import * as C from 'utils/services/AlertService';
+import capitalizeWords from 'utils/capitalizeWords';
 import * as A from './actions';
 import * as S from './selectors';
 import * as actions from '../actions';
@@ -99,7 +100,7 @@ export default ({ api }) => {
       const initialValues = applySpec({
         userInfo: {
           email: prop('email'),
-          name: prop('full_name'),
+          full_name: prop('full_name'),
           designation: prop('designation'),
           phone: prop('phone'),
           address: prop('address'),
@@ -114,6 +115,38 @@ export default ({ api }) => {
     } catch (e) {
       yield put(A.getUserInfoError(username, e));
       yield put(actions.alerts.displayError(C.GET_USER_INFO_ERROR));
+    }
+  };
+
+  const getRole = function* _(action) {
+    const { role } = action.payload;
+    try {
+      yield put(A.fetchRoleLoading(role));
+      const { securities } = (yield select(S.makeSelectRoles())).getOrElse({});
+      const selected = find(
+        r => r.role.name === capitalizeWords(role),
+        securities,
+      );
+      yield put(A.fetchRoleSuccess(role, selected));
+    } catch (e) {
+      yield put(A.fetchRoleFailure(role, e));
+      yield put(actions.alerts.displayError(C.GET_ROLE_ERROR));
+    }
+  };
+
+  const createUser = function* _(action) {
+    const { user } = action.payload;
+    try {
+      yield put(A.createUserLoading());
+      const sessionToken = (yield select(S.makeSelectApiToken())).getOrElse('');
+      yield call(api.createUser, user, sessionToken);
+      yield call(fetchUsers);
+      yield put(A.createUserSuccess());
+      yield put(actions.alerts.displaySuccess(C.CREATE_USER_SUCCESS));
+      yield put(actions.form.reset('addUser'));
+    } catch (e) {
+      yield put(A.createUserFailure(e.errors));
+      yield put(actions.alerts.displayError(C.CREATE_USER_ERROR));
     }
   };
 
@@ -150,7 +183,9 @@ export default ({ api }) => {
     fetchUser,
     fetchUsers,
     fetchRoles,
+    getRole,
     getUserInfo,
+    createUser,
     editUserInfo,
     renewSession,
     setSession,

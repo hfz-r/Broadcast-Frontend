@@ -24,6 +24,15 @@ export default ({ apiUrl, get, post, put }) => {
       sessionToken,
     });
 
+  const editMessage = (payload, slug, sessionToken) =>
+    put({
+      url: apiUrl,
+      endPoint: `/messages/${slug}`,
+      contentType: 'application/json',
+      data: { message: payload },
+      sessionToken,
+    });
+
   const createProject = (payload, sessionToken) =>
     post({
       url: apiUrl,
@@ -46,6 +55,7 @@ export default ({ apiUrl, get, post, put }) => {
     fetchMessages,
     fetchProjects,
     createMessage,
+    editMessage,
     createProject,
     editProject,
   };

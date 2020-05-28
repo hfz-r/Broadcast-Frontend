@@ -58,6 +58,20 @@ export const getUserInfoSuccess = (username, userInfo) => ({
   payload: { username, userInfo },
 });
 
+export const createUser = user => ({
+  type: T.CREATE_USER,
+  payload: { user },
+});
+export const createUserLoading = () => ({ type: T.CREATE_USER_LOADING });
+export const createUserSuccess = () => ({
+  type: T.CREATE_USER_SUCCESS,
+  payload: {},
+});
+export const createUserFailure = error => ({
+  type: T.CREATE_USER_FAILURE,
+  payload: { error },
+});
+
 export const editUserInfo = (username, user) => ({
   type: T.EDIT_USER_INFO,
   payload: { username, user },
@@ -92,4 +106,21 @@ export const fetchRolesSuccess = roles => ({
 export const fetchRolesFailure = error => ({
   type: T.FETCH_ROLES_FAILURE,
   payload: { error },
+});
+
+export const fetchRole = role => ({
+  type: T.FETCH_ROLE,
+  payload: { role },
+});
+export const fetchRoleLoading = role => ({
+  type: T.FETCH_ROLE_LOADING,
+  payload: { role },
+});
+export const fetchRoleSuccess = (role, roles) => ({
+  type: T.FETCH_ROLE_SUCCESS,
+  payload: { role, roles },
+});
+export const fetchRoleFailure = (role, error) => ({
+  type: T.FETCH_ROLE_FAILURE,
+  payload: { role, error },
 });

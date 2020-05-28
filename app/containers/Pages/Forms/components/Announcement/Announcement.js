@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import moment from 'moment';
 import { connect } from 'react-redux';
 import { Field, FieldArray, formValueSelector } from 'redux-form';
 import { makeStyles } from '@material-ui/styles';
@@ -67,17 +66,6 @@ const AboutAnnouncement = props => {
   const { className, formActions } = props;
 
   const classes = useStyles();
-
-  // useEffect(() => {
-  //   formActions.initialize(formName, {
-  //     projectAbout: {
-  //       // category: ['Others'],
-  //       // tags: ['hartalega'],
-  //       start_date: moment(),
-  //       end_date: moment().add(1, 'day'),
-  //     },
-  //   });
-  // }, []);
 
   const handleKeyDown = e => {
     if (e.key === 'Enter') {

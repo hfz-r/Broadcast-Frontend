@@ -22,9 +22,8 @@ const EditPage = props => {
 
   return (
     <Page className={classes.root} title="Announcement Edit">
-      {/* <Header title="Edit Announcement" subtitle={message.projectAbout.title} /> */}
       <Header message={message} />
-      <Template {...rest} />
+      <Template mode="edit" {...rest} />
     </Page>
   );
 };

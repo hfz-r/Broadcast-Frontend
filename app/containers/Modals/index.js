@@ -1,15 +1,15 @@
 import React from 'react';
 import AddProject from './AddProject';
-import AutoDisconnection from './AutoDisconnection';
+import AddUser from './AddUser';
 import EditProject from './EditProject';
-import ViewPermission from './Permission';
+import AutoDisconnection from './AutoDisconnection';
 
 const Modals = () => (
   <div>
     <AddProject />
-    <AutoDisconnection disableOutsideClose />
+    <AddUser />
     <EditProject />
-    <ViewPermission />
+    <AutoDisconnection disableOutsideClose />
   </div>
 );
 

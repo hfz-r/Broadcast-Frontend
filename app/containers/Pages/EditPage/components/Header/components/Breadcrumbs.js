@@ -28,7 +28,7 @@ const Breadcrumb = ({ slug }) => {
           to="/announcements/browse"
           variant="overline"
         >
-          Announcements
+          Browse Announcements
         </Link>
       </Typography>
       <Typography component="h2" gutterBottom variant="caption">

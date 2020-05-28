@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import { filter, take } from 'ramda';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -12,6 +13,7 @@ import {
   CardHeader,
   Checkbox,
   Divider,
+  Link,
   Typography,
   Table,
   TableBody,
@@ -38,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 
 const RoleCard = props => {
   const { securities: roles, securitiesCount: cnt } = props.data;
-  const { className, search, onViewRole } = props;
+  const { className, search } = props;
 
   const classes = useStyles();
 
@@ -96,7 +98,16 @@ const RoleCard = props => {
           value={selectedRoles.indexOf(r.role.name) !== -1}
         />
       </TableCell>
-      <TableCell>{r.role.name}</TableCell>
+      <TableCell>
+        <Link
+          color="inherit"
+          component={RouterLink}
+          to={`/management/r/${r.role.name.toLowerCase()}`}
+          variant="h6"
+        >
+          {r.role.name}
+        </Link>
+      </TableCell>
       <TableCell align="center">
         {r.users.length}
         {r.users.length > 0 ? ' users' : ' user'}
@@ -108,9 +119,10 @@ const RoleCard = props => {
       <TableCell align="center">
         <Button
           color="primary"
+          component={RouterLink}
           size="small"
+          to={`/management/r/${r.role.name.toLowerCase()}`}
           variant="outlined"
-          onClick={() => onViewRole(r.permissions)}
         >
           View
         </Button>
@@ -192,7 +204,6 @@ RoleCard.propTypes = {
   className: PropTypes.string,
   data: PropTypes.object,
   search: PropTypes.string,
-  onViewRole: PropTypes.func,
 };
 
 export default RoleCard;

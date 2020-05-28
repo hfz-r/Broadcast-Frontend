@@ -12,9 +12,10 @@ import Dashboard from 'containers/DashboardPage';
 import AnnouncementPages from 'containers/Pages';
 import AnnouncementList from 'containers/ListPage';
 import AnnouncementDetails from 'containers/DetailsPage';
-import UserMgmt from 'containers/UserMgmt';
 import UserMgmtDetails from 'containers/DetailsUser';
+import RoleMgmtDetails from 'containers/DetailsRole';
 import ProjectMgmtDetails from 'containers/DetailsProject';
+import UserMgmt from 'containers/UserMgmt';
 import RoleMgmt from 'containers/RoleMgmt';
 import ProjectMgmt from 'containers/ProjectMgmt';
 
@@ -55,6 +56,11 @@ const App = props => {
       <DashboardLayout
         path="/management/p/:project"
         component={ProjectMgmtDetails}
+        exact
+      />
+      <DashboardLayout
+        path="/management/r/:role"
+        component={RoleMgmtDetails}
         exact
       />
       <DashboardLayout

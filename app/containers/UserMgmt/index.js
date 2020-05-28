@@ -15,12 +15,19 @@ class UserMgmtContainer extends React.PureComponent {
   render() {
     const { data, search, ...rest } = this.props;
 
+    const handleAddUser = () => {
+      this.props.modalsActions.showModal('AddUser');
+    };
+
+    const props = { handleAddUser };
+
     return data.cata({
       Success: value => (
         <UserMgmt
           search={search && search.toLowerCase()}
           data={value}
           {...rest}
+          {...props}
         />
       ),
       Failure: message => <div>{message}</div>,
@@ -34,6 +41,7 @@ UserMgmtContainer.propTypes = {
   data: PropTypes.object,
   search: PropTypes.string,
   profileActions: PropTypes.object,
+  modalsActions: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -43,6 +51,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
   profileActions: bindActionCreators(actions.profile, dispatch),
+  modalsActions: bindActionCreators(actions.modals, dispatch),
 });
 
 const withConnect = connect(

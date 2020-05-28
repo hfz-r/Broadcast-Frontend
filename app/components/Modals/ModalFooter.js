@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { colors } from '@material-ui/core';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     position: 'relative',
     display: 'flex',
@@ -13,7 +13,9 @@ const useStyles = makeStyles({
     width: '100%',
     padding: '20px 30px',
     boxSizing: 'border-box',
-    borderBottom: `1px solid ${colors.grey[100]}`,
+    [theme.breakpoints.up('sm')]: {
+      borderBottom: `1px solid ${colors.grey[100]}`,
+    },
   },
   footer: {
     display: 'flex',
@@ -22,7 +24,7 @@ const useStyles = makeStyles({
     width: '100%',
     justifyContent: props => selectAlignment(props.align),
   },
-});
+}));
 
 const selectAlignment = align => {
   switch (align) {

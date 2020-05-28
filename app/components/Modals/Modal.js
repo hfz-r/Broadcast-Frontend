@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   modal: {
-    position: 'absolute',
+    // position: 'absolute',
     width: '100%',
     marginTop: 60,
     zIndex: '1040',
@@ -58,12 +58,16 @@ const selectWidth = size => {
 };
 
 const Modal = props => {
-  const { children, size, position, total, ...rest } = props;
+  const { children, size, position, total, className, ...rest } = props;
   const classes = useStyles(props);
 
   return (
-    <div className={clsx(classes.background, rest.class)} position={position}>
-      <div className={classes.modal} position={position} {...rest}>
+    <div className={classes.background} position={position}>
+      <div
+        className={clsx(classes.modal, className)}
+        position={position}
+        {...rest}
+      >
         {children}
       </div>
     </div>
@@ -74,6 +78,7 @@ Modal.propTypes = {
   children: PropTypes.node,
   position: PropTypes.number,
   total: PropTypes.number,
+  className: PropTypes.string,
   size: PropTypes.oneOf(['small', 'medium', 'large', 'xlarge', '']),
 };
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Typography } from '@material-ui/core';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -24,6 +25,7 @@ const useStyles = makeStyles(theme => ({
 
 const Header = props => {
   const { className, user, ...rest } = props;
+
   const classes = useStyles();
 
   return (
@@ -32,10 +34,18 @@ const Header = props => {
         Home
       </Typography>
       <Typography component="h1" gutterBottom variant="h3">
-        Hi, {user.given_name}
+        {!user.given_name ? (
+          <Skeleton variant="text" animation="wave" width="50%" />
+        ) : (
+          `Hi, ${user.given_name}`
+        )}
       </Typography>
       <Typography variant="subtitle1">
-        Here&apos;s what&apos;s happening
+        {!user.given_name ? (
+          <Skeleton variant="text" animation="wave" width="50%" />
+        ) : (
+          `Here's what's happening`
+        )}
       </Typography>
     </div>
   );

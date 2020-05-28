@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'container.AnnouncementCreate';
+export const scope = 'container.AnnouncementPage';
 
 export default defineMessages({
   buttonClear: {
@@ -10,6 +10,10 @@ export default defineMessages({
   buttonCreateAnnouncement: {
     id: `${scope}.button.createannouncement`,
     defaultMessage: 'Create announcement',
+  },
+  buttonEditAnnouncement: {
+    id: `${scope}.button.editannouncement`,
+    defaultMessage: 'Edit announcement',
   },
   /* form-helper section */
   required: {

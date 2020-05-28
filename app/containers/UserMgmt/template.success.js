@@ -22,7 +22,7 @@ const UserMgmt = props => {
 
   return (
     <Page className={classes.root} title="User Management">
-      <Header />
+      <Header onAddUser={props.handleAddUser} />
       <SearchBar onFilter={handleFilter} />
       {props.data && <Results className={classes.results} {...props} />}
     </Page>
@@ -31,6 +31,7 @@ const UserMgmt = props => {
 
 UserMgmt.propTypes = {
   data: PropTypes.object,
+  handleAddUser: PropTypes.func,
 };
 
 export default UserMgmt;

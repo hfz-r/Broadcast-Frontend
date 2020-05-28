@@ -76,7 +76,7 @@ const UserEdit = props => {
             </Grid>
             <Grid item md={6} xs={12}>
               <Field
-                name="name"
+                name="full_name"
                 label="Full name"
                 component={RenderTextField}
                 fullWidth

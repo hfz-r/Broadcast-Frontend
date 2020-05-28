@@ -11,14 +11,11 @@ import AnnouncementList from './template.success';
 class AnnouncementListContainer extends React.PureComponent {
   static propTypes = {
     data: PropTypes.object,
-    apiToken: PropTypes.object,
     announcementActions: PropTypes.object,
   };
 
   componentDidMount() {
-    const { apiToken } = this.props;
-    const sessionToken = apiToken.getOrElse('');
-    this.props.announcementActions.fetchMessages(sessionToken);
+    this.props.announcementActions.fetchMessages();
   }
 
   render() {
@@ -35,7 +32,6 @@ class AnnouncementListContainer extends React.PureComponent {
 
 const mapStateToProps = createStructuredSelector({
   data: selectors.announcement.makeSelectMessages(),
-  apiToken: selectors.profile.makeSelectApiToken(),
 });
 
 const mapDispatchToProps = dispatch => ({

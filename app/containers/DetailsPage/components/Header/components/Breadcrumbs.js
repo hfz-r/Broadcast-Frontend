@@ -8,7 +8,7 @@ const useStyles = makeStyles(() => ({
   root: {},
 }));
 
-const Breadcrumb = ({ page, totalPage }) => {
+const Breadcrumb = ({ slug, page, totalPage }) => {
   const classes = useStyles();
 
   return (
@@ -30,14 +30,16 @@ const Breadcrumb = ({ page, totalPage }) => {
           Browse announcements
         </Link>
       </Typography>
-      <Typography component="h2" gutterBottom variant="overline">
-        {`#${page}`}
+      <Typography component="h2" gutterBottom variant="caption">
+        {/* {`#${page}`} */}
+        {slug}
       </Typography>
     </Breadcrumbs>
   );
 };
 
 Breadcrumb.propTypes = {
+  slug: PropTypes.string,
   page: PropTypes.number,
   totalPage: PropTypes.number,
 };

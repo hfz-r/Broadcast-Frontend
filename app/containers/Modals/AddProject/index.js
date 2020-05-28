@@ -32,6 +32,7 @@ class AddProjectContainer extends React.PureComponent {
     );
   }
 }
+
 AddProjectContainer.propTypes = {
   modalActions: PropTypes.object,
   announcementActions: PropTypes.object,

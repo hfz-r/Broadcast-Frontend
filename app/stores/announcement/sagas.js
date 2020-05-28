@@ -1,5 +1,5 @@
 import { call, put, select } from 'redux-saga/effects';
-import { applySpec, find, path, prop } from 'ramda';
+import { applySpec, find, prop } from 'ramda';
 import * as C from 'utils/services/AlertService';
 import * as A from './actions';
 import * as S from './selectors';
@@ -7,10 +7,11 @@ import * as actions from '../actions';
 import { profile as P } from '../selectors';
 
 export default ({ api }) => {
-  const fetchMessages = function* _(action) {
+  const fetchMessages = function* _() {
     try {
       yield put(A.fetchMessagesLoading());
-      const messages = yield call(api.fetchMessages, action.payload);
+      const sessionToken = (yield select(P.makeSelectApiToken())).getOrElse('');
+      const messages = yield call(api.fetchMessages, sessionToken);
       yield put(A.fetchMessagesSuccess(messages));
     } catch (e) {
       yield put(A.fetchMessagesFailure(e));
@@ -40,6 +41,22 @@ export default ({ api }) => {
     } catch (e) {
       yield put(A.fetchMessageFailure(slug, e));
       yield put(actions.alerts.displayError(C.GET_ANNOUNCEMENT_ERROR));
+    }
+  };
+
+  const editMessage = function* _(action) {
+    const { slug, message } = action.payload;
+    try {
+      yield put(A.editMessageLoading(slug));
+      const sessionToken = (yield select(P.makeSelectApiToken())).getOrElse('');
+      yield call(api.editMessage, message, slug, sessionToken);
+      yield call(fetchMessages);
+      yield put(A.fetchMessage(slug));
+      yield put(A.editMessageSuccess(slug));
+      yield put(actions.alerts.displaySuccess(C.UPDATE_ANNOUNCEMENT_SUCCESS));
+    } catch (e) {
+      yield put(A.editMessageError(slug, e));
+      yield put(actions.alerts.displayError(C.UPDATE_ANNOUNCEMENT_ERROR));
     }
   };
 
@@ -109,6 +126,7 @@ export default ({ api }) => {
     submitMessage,
     getMessage,
     fetchProjects,
+    editMessage,
     createProject,
     getProject,
     editProject,

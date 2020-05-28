@@ -3,14 +3,23 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Field, reduxForm } from 'redux-form';
 import { makeStyles } from '@material-ui/styles';
-import { Grid, Button } from '@material-ui/core';
+import { Grid, Button, colors } from '@material-ui/core';
 import { Modal, ModalBody, ModalHeader, ModalFooter } from 'components';
 import { RenderTextField } from 'components/Form';
 
 const useStyles = makeStyles(theme => ({
-  root: {},
+  root: {
+    position: 'absolute',
+  },
   content: {
     // marginTop: theme.spacing(1),
+  },
+  saveButton: {
+    color: theme.palette.white,
+    backgroundColor: colors.green[600],
+    '&:hover': {
+      backgroundColor: colors.green[900],
+    },
   },
 }));
 
@@ -31,7 +40,12 @@ const AddProject = props => {
   const classes = useStyles();
 
   return (
-    <Modal size="medium" position={position} total={total}>
+    <Modal
+      size="medium"
+      className={classes.root}
+      position={position}
+      total={total}
+    >
       <form onSubmit={handleSubmit}>
         <ModalHeader
           style={{ borderBottom: 0, paddingBottom: 0 }}
@@ -79,8 +93,8 @@ const AddProject = props => {
             />
           </Button>
           <Button
+            className={classes.saveButton}
             type="submit"
-            color="primary"
             variant="contained"
             disabled={invalid || submitting}
           >
